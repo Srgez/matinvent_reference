@@ -1,4 +1,5 @@
 import io
+import os
 import contextlib
 import multiprocessing as mp
 from typing import List, Literal
@@ -210,6 +211,7 @@ class OptEval:
         silent: bool = True,
         device: str | None = None,
         structure_matcher: Literal["ordered", "disordered"] = "disordered",
+        reference_path: str | None = None,
         **kwargs,
     ) -> None:
         self.relax = relax
@@ -222,11 +224,17 @@ class OptEval:
         )
         self.cfg = OmegaConf.create(kwargs)
 
-        _path = hf_hub_download(
-            repo_id="jwchen25/MatInvent",
-            filename="reference_MP2020correction.gz",
+        path = reference_path or os.environ.get("REFERENCE_DATASET_PATH") or os.environ.get(
+            "MATINVENT_OPT_EVAL_REFERENCE_PATH"
         )
-        self.reference = LMDBGZSerializer().deserialize(_path)
+        if path:
+            self.reference = LMDBGZSerializer().deserialize(path)
+        else:
+            _path = hf_hub_download(
+                repo_id="jwchen25/MatInvent",
+                filename="reference_MP2020correction.gz",
+            )
+            self.reference = LMDBGZSerializer().deserialize(_path)
 
     def __call__(
         self,

@@ -261,7 +261,10 @@ class MatterGenSampler:
         if sampling_config_overrides is None:
             sampling_config_overrides = []
 
-        with hydra.initialize_config_dir(os.path.abspath(str(sampling_config_path))):
+        with hydra.initialize_config_dir(
+            os.path.abspath(str(sampling_config_path)),
+            version_base=None,
+        ):
             sampling_config = hydra.compose(
                 config_name=sampling_config_name, overrides=sampling_config_overrides
             )

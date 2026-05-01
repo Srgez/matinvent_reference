@@ -37,10 +37,14 @@ class MatterGenSuite(ModelSuite):
         sample_cfg: DictConfig,
         finetune_cfg: DictConfig,
         model_path: str | None = None,
-        config_overrides: list[str] = [],
+        config_overrides: list[str] | None = None,
         device: str | None = None,
         **kwargs,
     ) -> None:
+        if config_overrides is None:
+            config_overrides = []
+        if isinstance(config_overrides, str):
+            config_overrides = [config_overrides]
         super().__init__(
             model_name=model_name,
             sample_cfg=sample_cfg,
@@ -93,8 +97,7 @@ class MatterGenSuite(ModelSuite):
 
     def get_sampler(self):
         sampler = MatterGenSampler(
-            batch_size=self.sample_cfg.batch_size,
-            num_batches=self.sample_cfg.num_batches,
+            **OmegaConf.to_container(self.sample_cfg, resolve=True),
         )
         return sampler
 

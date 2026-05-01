@@ -110,3 +110,12 @@ Local
 
 # VS Code
 .vscode/
+
+# Local environments and caches
+.venv/
+.uv-cache/
+.mplconfig/
+.codex
+
+# Local datasets / references
+reference/

@@ -7,7 +7,7 @@ import torch
 from omegaconf import DictConfig
 
 from pipeline.base import ReinL
-from pipeline.filters import OptEval, invalid_filter
+from pipeline.filters import invalid_filter
 from pipeline.utils.save import save_structures
 from pipeline.utils.logger import Logger
 from rewards.reward import Reward
@@ -54,8 +54,10 @@ class MatInvent(ReinL):
         self.div_filter = div_filter
         self.df_args = df_args
 
-        if 'filter' not in self.sample_cfg:
-            self.opt_eval = OptEval()
+        # Without OptFilter, sample_step does not call OptEval (see commented metrics line).
+        # Do not construct OptEval here: it would LMDB-open the same reference.gz as
+        # MatterSim ehull reward and raise "environment is already open in this process".
+        self.opt_eval = None
 
         self.load_model()
 

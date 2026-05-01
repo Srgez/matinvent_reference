@@ -1,0 +1,23 @@
+# reward for lower energy above hull / better thermodynamic stability
+_target_: rewards.reward.Reward
+
+root_dir: rewards
+
+mattersim_potential_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/mattersim/mattersim-v1.0.0-1M.pth
+mattersim_reference_dataset_path: /mnt/shared-storage-user/zhangsizhe/mattergen/data-release/alex-mp/reference_MP2020correction.gz
+
+prop_cfg:
+  - name: ehull
+    calculator:
+      _target_: rewards.calculators.MatterSim
+      root_dir: rewards/ehull
+      task: ehull
+      device: ${device}
+      potential_load_path: ${reward.mattersim_potential_path}
+      reference_dataset_path: ${reward.mattersim_reference_dataset_path}
+      silent: true
+    target: descending
+    minv: 0.0
+    maxv: 0.5
+
+reward_threshold: 0.8

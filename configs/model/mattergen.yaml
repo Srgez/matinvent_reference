@@ -6,6 +6,7 @@ device: ${device}
 sample_cfg:
   batch_size: ${calc:'${eval_size} * 4'}
   num_batches: 1
+  sampling_config_path: null
 
 finetune_cfg:
   batch_size: ${eval_size}
