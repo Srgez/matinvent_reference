@@ -8,6 +8,9 @@ device: ${device}
 save_dir: ./
 save_freq: 100  # for agent model
 
+# resume: set to N to skip loops 0..(N-1) and load model from a prior checkpoint
+start_loop: 0
+
 # sampling
 sample_cfg: ${sample_cfg}
 
@@ -32,3 +35,28 @@ finetune_cfg:
   accum_steps: 50  # accumulation_steps
   epochs: 3
   sigma: 0.025
+
+# GRPO configuration
+# mode: none  -> original MatInvent behaviour (raw reward weighting)
+# mode: lite  -> on-policy group advantage, no ratio/clipping (phase 1)
+# mode: strict -> full logprob ratio + clipping (phase 2, requires grpo_sampler)
+# mode: branch -> multi-branch tree rollout (phase 3)
+grpo:
+  mode: none
+
+  # Advantage normalisation (used by lite / strict / branch)
+  adv_eps: 1.0e-8       # epsilon added to reward std
+  adv_clip: 5.0         # symmetric clip bound on advantage; null to disable
+
+  # KL regularisation weighting
+  # reward_weighted: original (1.1 - reward) * sigma  -- only valid for mode=none
+  # fixed:           sigma constant weight             -- recommended for mode=lite+
+  kl_weight_mode: fixed
+
+  # Phase 2 (strict) settings – ignored in mode=none/lite
+  clip_eps: 0.2         # PPO ratio clip epsilon
+  strict_logprob: false # whether to collect per-step logprobs during sampling
+
+  # Phase 3 (branch) settings – ignored in mode=none/lite/strict
+  branch_steps: [300, 500, 800]
+  branch_factors: [4, 4, 2]

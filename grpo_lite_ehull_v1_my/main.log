@@ -1,0 +1,635 @@
+[2026-05-02 02:11:31,239][root][INFO] - File logging enabled → /mnt/shared-storage-user/zhangsizhe/matinvent_reference/exp_res/grpo_lite_ehull_v1_my/train.log
+[2026-05-02 02:11:37,316][root][INFO] - GRPO mode: lite
+[2026-05-02 02:11:41,152][root][INFO] - *****   RL START   *****
+[2026-05-02 02:11:41,152][root][INFO] - *****   LOOP 0 START   *****
+[2026-05-02 02:11:41,153][root][INFO] - SAMPLE:
+[2026-05-02 02:16:30,487][root][INFO] - 
+[2026-05-02 02:16:30,498][root][INFO] - SCORE:
+[2026-05-02 02:22:10,550][root][INFO] - Evaluation costs to date: 64
+[2026-05-02 02:22:10,551][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:22:10,551][root][INFO] - reward mean=0.7729 std=0.1752
+[2026-05-02 02:22:10,551][root][INFO] - ehull mean=0.1135 std=0.0876
+[2026-05-02 02:22:10,622][root][INFO] - 64 crystals generated so far, 64 unique components.  Burden: None, Div. Ratio: 1.0.
+[2026-05-02 02:22:10,633][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:22:10,635][root][INFO] - replay buffer size=16
+[2026-05-02 02:22:10,635][root][INFO] - buffer reward mean=0.9428221985585916
+[2026-05-02 02:22:10,635][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.7729237154515124, baseline_reward_std=0.1752352574389634, train_reward_mean=0.9428221985585916, train_reward_std=0.0276464771257509, n_all_success=64, n_train=16
+[2026-05-02 02:22:10,636][root][INFO] - Advantage stats [train]: adv_train_mean=0.9695, adv_train_std=0.1578, adv_train_min=0.7393, adv_train_max=1.2833, adv_train_pos_frac=1.0000
+[2026-05-02 02:22:10,636][root][INFO] - FINETUNE:
+[2026-05-02 02:22:30,335][root][INFO] - Epoch 0: loss: 0.2753, loss_diff: 0.2749, loss_kl: 0.0163
+[2026-05-02 02:22:49,824][root][INFO] - Epoch 1: loss: 0.2637, loss_diff: 0.2622, loss_kl: 0.0610
+[2026-05-02 02:23:09,233][root][INFO] - Epoch 2: loss: 0.2539, loss_diff: 0.2509, loss_kl: 0.1213
+[2026-05-02 02:23:09,235][root][INFO] - *****   LOOP 0 FINISH   *****
+[2026-05-02 02:23:09,236][root][INFO] - Total time taken: 11.47 min.
+
+
+[2026-05-02 02:23:09,236][root][INFO] - *****   LOOP 1 START   *****
+[2026-05-02 02:23:09,236][root][INFO] - SAMPLE:
+[2026-05-02 02:26:28,560][root][INFO] - 
+[2026-05-02 02:26:28,572][root][INFO] - SCORE:
+[2026-05-02 02:26:38,104][root][INFO] - Evaluation costs to date: 128
+[2026-05-02 02:26:38,105][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:26:38,105][root][INFO] - reward mean=0.7808 std=0.1548
+[2026-05-02 02:26:38,105][root][INFO] - ehull mean=0.1090 std=0.0783
+[2026-05-02 02:26:38,233][root][INFO] - 128 crystals generated so far, 128 unique components.  Burden: None, Div. Ratio: 1.0.
+[2026-05-02 02:26:38,245][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:26:38,247][root][INFO] - replay buffer size=32
+[2026-05-02 02:26:38,247][root][INFO] - buffer reward mean=0.9454468435888299
+[2026-05-02 02:26:38,247][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.780770417460066, baseline_reward_std=0.1547624061179037, train_reward_mean=0.9480714886190682, train_reward_std=0.0285154913600101, n_all_success=64, n_train=16
+[2026-05-02 02:26:38,248][root][INFO] - Advantage stats [train]: adv_train_mean=1.0641, adv_train_std=0.1823, adv_train_min=0.7864, adv_train_max=1.4166, adv_train_pos_frac=1.0000
+[2026-05-02 02:26:38,248][root][INFO] - FINETUNE:
+[2026-05-02 02:27:07,882][root][INFO] - Epoch 0: loss: 0.2828, loss_diff: 0.2779, loss_kl: 0.1974
+[2026-05-02 02:27:37,370][root][INFO] - Epoch 1: loss: 0.2767, loss_diff: 0.2711, loss_kl: 0.2269
+[2026-05-02 02:28:06,839][root][INFO] - Epoch 2: loss: 0.2727, loss_diff: 0.2664, loss_kl: 0.2503
+[2026-05-02 02:28:06,841][root][INFO] - *****   LOOP 1 FINISH   *****
+[2026-05-02 02:28:06,842][root][INFO] - Total time taken: 4.96 min.
+
+
+[2026-05-02 02:28:06,842][root][INFO] - *****   LOOP 2 START   *****
+[2026-05-02 02:28:06,842][root][INFO] - SAMPLE:
+[2026-05-02 02:31:23,773][root][INFO] - 
+[2026-05-02 02:31:23,784][root][INFO] - SCORE:
+[2026-05-02 02:31:33,972][root][INFO] - Evaluation costs to date: 192
+[2026-05-02 02:31:33,972][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:31:33,973][root][INFO] - reward mean=0.8074 std=0.1777
+[2026-05-02 02:31:33,973][root][INFO] - ehull mean=0.0938 std=0.0922
+[2026-05-02 02:31:34,163][root][INFO] - 192 crystals generated so far, 192 unique components.  Burden: 1.761467889908257, Div. Ratio: 1.0.
+[2026-05-02 02:31:34,175][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:31:34,178][root][INFO] - replay buffer size=48
+[2026-05-02 02:31:34,178][root][INFO] - buffer reward mean=0.9520364426451452
+[2026-05-02 02:31:34,179][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8074240896061149, baseline_reward_std=0.17773645370583965, train_reward_mean=0.9652156407577761, train_reward_std=0.03076414352846297, n_all_success=64, n_train=16
+[2026-05-02 02:31:34,179][root][INFO] - Advantage stats [train]: adv_train_mean=0.8162, adv_train_std=0.1706, adv_train_min=0.5348, adv_train_max=1.0835, adv_train_pos_frac=1.0000
+[2026-05-02 02:31:34,179][root][INFO] - FINETUNE:
+[2026-05-02 02:32:04,954][root][INFO] - Epoch 0: loss: 0.2294, loss_diff: 0.2215, loss_kl: 0.3133
+[2026-05-02 02:32:35,547][root][INFO] - Epoch 1: loss: 0.2221, loss_diff: 0.2144, loss_kl: 0.3080
+[2026-05-02 02:33:06,102][root][INFO] - Epoch 2: loss: 0.2189, loss_diff: 0.2110, loss_kl: 0.3187
+[2026-05-02 02:33:06,104][root][INFO] - *****   LOOP 2 FINISH   *****
+[2026-05-02 02:33:06,105][root][INFO] - Total time taken: 4.99 min.
+
+
+[2026-05-02 02:33:06,105][root][INFO] - *****   LOOP 3 START   *****
+[2026-05-02 02:33:06,106][root][INFO] - SAMPLE:
+[2026-05-02 02:36:21,266][root][INFO] - 
+[2026-05-02 02:36:21,277][root][INFO] - SCORE:
+[2026-05-02 02:36:31,078][root][INFO] - Evaluation costs to date: 256
+[2026-05-02 02:36:31,078][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:36:31,079][root][INFO] - reward mean=0.7563 std=0.1842
+[2026-05-02 02:36:31,079][root][INFO] - ehull mean=0.1218 std=0.0923
+[2026-05-02 02:36:31,326][root][INFO] - 256 crystals generated so far, 255 unique components.  Burden: 1.841726618705036, Div. Ratio: 0.99609375.
+[2026-05-02 02:36:31,339][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:36:31,341][root][INFO] - replay buffer size=63
+[2026-05-02 02:36:31,342][root][INFO] - buffer reward mean=0.9486200443632807
+[2026-05-02 02:36:31,342][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.7562768211826243, baseline_reward_std=0.18424807807600038, train_reward_mean=0.9374673408477654, train_reward_std=0.035434587972467894, n_all_success=64, n_train=16
+[2026-05-02 02:36:31,342][root][INFO] - Advantage stats [train]: adv_train_mean=1.0188, adv_train_std=0.1954, adv_train_min=0.7263, adv_train_max=1.3228, adv_train_pos_frac=1.0000
+[2026-05-02 02:36:31,343][root][INFO] - FINETUNE:
+[2026-05-02 02:37:00,284][root][INFO] - Epoch 0: loss: 0.2580, loss_diff: 0.2504, loss_kl: 0.3037
+[2026-05-02 02:37:29,057][root][INFO] - Epoch 1: loss: 0.2517, loss_diff: 0.2450, loss_kl: 0.2690
+[2026-05-02 02:37:57,789][root][INFO] - Epoch 2: loss: 0.2471, loss_diff: 0.2403, loss_kl: 0.2732
+[2026-05-02 02:37:57,791][root][INFO] - *****   LOOP 3 FINISH   *****
+[2026-05-02 02:37:57,792][root][INFO] - Total time taken: 4.86 min.
+
+
+[2026-05-02 02:37:57,793][root][INFO] - *****   LOOP 4 START   *****
+[2026-05-02 02:37:57,793][root][INFO] - SAMPLE:
+[2026-05-02 02:41:13,117][root][INFO] - 
+[2026-05-02 02:41:13,129][root][INFO] - SCORE:
+[2026-05-02 02:41:21,936][root][INFO] - Evaluation costs to date: 320
+[2026-05-02 02:41:21,936][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:41:21,936][root][INFO] - reward mean=0.7906 std=0.2000
+[2026-05-02 02:41:21,937][root][INFO] - ehull mean=0.1049 std=0.1177
+[2026-05-02 02:41:22,244][root][INFO] - 320 crystals generated so far, 319 unique components.  Burden: 1.807909604519774, Div. Ratio: 0.996875.
+[2026-05-02 02:41:22,258][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:41:22,261][root][INFO] - replay buffer size=79
+[2026-05-02 02:41:22,261][root][INFO] - buffer reward mean=0.9526119570124295
+[2026-05-02 02:41:22,262][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.7906337239875485, baseline_reward_std=0.2000311024834503, train_reward_mean=0.9683301130684525, train_reward_std=0.02810787591396951, n_all_success=64, n_train=16
+[2026-05-02 02:41:22,262][root][INFO] - Advantage stats [train]: adv_train_mean=0.8317, adv_train_std=0.1758, adv_train_min=0.4972, adv_train_max=1.0467, adv_train_pos_frac=1.0000
+[2026-05-02 02:41:22,262][root][INFO] - FINETUNE:
+[2026-05-02 02:41:55,710][root][INFO] - Epoch 0: loss: 0.2368, loss_diff: 0.2276, loss_kl: 0.3710
+[2026-05-02 02:42:28,982][root][INFO] - Epoch 1: loss: 0.2334, loss_diff: 0.2239, loss_kl: 0.3800
+[2026-05-02 02:43:02,211][root][INFO] - Epoch 2: loss: 0.2293, loss_diff: 0.2200, loss_kl: 0.3715
+[2026-05-02 02:43:02,214][root][INFO] - *****   LOOP 4 FINISH   *****
+[2026-05-02 02:43:02,214][root][INFO] - Total time taken: 5.07 min.
+
+
+[2026-05-02 02:43:02,215][root][INFO] - *****   LOOP 5 START   *****
+[2026-05-02 02:43:02,215][root][INFO] - SAMPLE:
+[2026-05-02 02:46:18,196][root][INFO] - 
+[2026-05-02 02:46:18,207][root][INFO] - SCORE:
+[2026-05-02 02:46:27,248][root][INFO] - Evaluation costs to date: 384
+[2026-05-02 02:46:27,249][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:46:27,249][root][INFO] - reward mean=0.7658 std=0.2022
+[2026-05-02 02:46:27,249][root][INFO] - ehull mean=0.1159 std=0.1121
+[2026-05-02 02:46:27,611][root][INFO] - 384 crystals generated so far, 383 unique components.  Burden: 1.8113207547169812, Div. Ratio: 0.9973958333333334.
+[2026-05-02 02:46:27,625][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:46:27,628][root][INFO] - replay buffer size=95
+[2026-05-02 02:46:27,628][root][INFO] - buffer reward mean=0.9547084620826858
+[2026-05-02 02:46:27,628][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.7657683030925565, baseline_reward_std=0.20215853464622036, train_reward_mean=0.9650599558670756, train_reward_std=0.03227246407665309, n_all_success=64, n_train=16
+[2026-05-02 02:46:27,629][root][INFO] - Advantage stats [train]: adv_train_mean=0.9272, adv_train_std=0.1731, adv_train_min=0.6164, adv_train_max=1.1587, adv_train_pos_frac=1.0000
+[2026-05-02 02:46:27,629][root][INFO] - FINETUNE:
+[2026-05-02 02:46:58,658][root][INFO] - Epoch 0: loss: 0.2499, loss_diff: 0.2408, loss_kl: 0.3640
+[2026-05-02 02:47:29,527][root][INFO] - Epoch 1: loss: 0.2443, loss_diff: 0.2361, loss_kl: 0.3298
+[2026-05-02 02:48:00,342][root][INFO] - Epoch 2: loss: 0.2399, loss_diff: 0.2308, loss_kl: 0.3623
+[2026-05-02 02:48:00,344][root][INFO] - *****   LOOP 5 FINISH   *****
+[2026-05-02 02:48:00,344][root][INFO] - Total time taken: 4.97 min.
+
+
+[2026-05-02 02:48:00,345][root][INFO] - *****   LOOP 6 START   *****
+[2026-05-02 02:48:00,345][root][INFO] - SAMPLE:
+[2026-05-02 02:51:09,531][root][INFO] - 
+[2026-05-02 02:51:09,543][root][INFO] - SCORE:
+[2026-05-02 02:51:19,855][root][INFO] - Evaluation costs to date: 448
+[2026-05-02 02:51:19,856][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:51:19,856][root][INFO] - reward mean=0.7831 std=0.2197
+[2026-05-02 02:51:19,857][root][INFO] - ehull mean=0.1055 std=0.1161
+[2026-05-02 02:51:20,301][root][INFO] - 448 crystals generated so far, 447 unique components.  Burden: 1.7991967871485943, Div. Ratio: 0.9977678571428571.
+[2026-05-02 02:51:20,316][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:51:20,319][root][INFO] - replay buffer size=111
+[2026-05-02 02:51:20,319][root][INFO] - buffer reward mean=0.9582846945984519
+[2026-05-02 02:51:20,320][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.7831360927848898, baseline_reward_std=0.21969318412761044, train_reward_mean=0.9795185751608131, train_reward_std=0.01601794131764305, n_all_success=64, n_train=16
+[2026-05-02 02:51:20,320][root][INFO] - Advantage stats [train]: adv_train_mean=0.8132, adv_train_std=0.1446, adv_train_min=0.5230, adv_train_max=0.9871, adv_train_pos_frac=1.0000
+[2026-05-02 02:51:20,320][root][INFO] - FINETUNE:
+[2026-05-02 02:51:52,612][root][INFO] - Epoch 0: loss: 0.2215, loss_diff: 0.2107, loss_kl: 0.4306
+[2026-05-02 02:52:24,720][root][INFO] - Epoch 1: loss: 0.2191, loss_diff: 0.2088, loss_kl: 0.4131
+[2026-05-02 02:52:56,777][root][INFO] - Epoch 2: loss: 0.2159, loss_diff: 0.2055, loss_kl: 0.4175
+[2026-05-02 02:52:56,779][root][INFO] - *****   LOOP 6 FINISH   *****
+[2026-05-02 02:52:56,779][root][INFO] - Total time taken: 4.94 min.
+
+
+[2026-05-02 02:52:56,780][root][INFO] - *****   LOOP 7 START   *****
+[2026-05-02 02:52:56,780][root][INFO] - SAMPLE:
+[2026-05-02 02:56:04,388][root][INFO] - 
+[2026-05-02 02:56:04,399][root][INFO] - SCORE:
+[2026-05-02 02:56:14,146][root][INFO] - Evaluation costs to date: 512
+[2026-05-02 02:56:14,146][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 02:56:14,146][root][INFO] - reward mean=0.8365 std=0.1714
+[2026-05-02 02:56:14,146][root][INFO] - ehull mean=0.0785 std=0.0896
+[2026-05-02 02:56:14,625][root][INFO] - 512 crystals generated so far, 511 unique components.  Burden: 1.7239057239057238, Div. Ratio: 0.998046875.
+[2026-05-02 02:56:14,640][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 02:56:14,643][root][INFO] - replay buffer size=127
+[2026-05-02 02:56:14,643][root][INFO] - buffer reward mean=0.9614230284734234
+[2026-05-02 02:56:14,643][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.836517505848813, baseline_reward_std=0.17143328542636607, train_reward_mean=0.983195219731039, train_reward_std=0.018242774265821514, n_all_success=64, n_train=16
+[2026-05-02 02:56:14,644][root][INFO] - Advantage stats [train]: adv_train_mean=0.7603, adv_train_std=0.1664, adv_train_min=0.3848, adv_train_max=0.9536, adv_train_pos_frac=1.0000
+[2026-05-02 02:56:14,644][root][INFO] - FINETUNE:
+[2026-05-02 02:56:46,626][root][INFO] - Epoch 0: loss: 0.1925, loss_diff: 0.1825, loss_kl: 0.4002
+[2026-05-02 02:57:18,448][root][INFO] - Epoch 1: loss: 0.1869, loss_diff: 0.1761, loss_kl: 0.4334
+[2026-05-02 02:57:50,228][root][INFO] - Epoch 2: loss: 0.1842, loss_diff: 0.1737, loss_kl: 0.4210
+[2026-05-02 02:57:50,231][root][INFO] - *****   LOOP 7 FINISH   *****
+[2026-05-02 02:57:50,231][root][INFO] - Total time taken: 4.89 min.
+
+
+[2026-05-02 02:57:50,232][root][INFO] - *****   LOOP 8 START   *****
+[2026-05-02 02:57:50,232][root][INFO] - SAMPLE:
+[2026-05-02 03:01:04,640][root][INFO] - 
+[2026-05-02 03:01:04,652][root][INFO] - SCORE:
+[2026-05-02 03:01:17,184][root][INFO] - Evaluation costs to date: 576
+[2026-05-02 03:01:17,185][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:01:17,185][root][INFO] - reward mean=0.8132 std=0.1750
+[2026-05-02 03:01:17,185][root][INFO] - ehull mean=0.0910 std=0.0905
+[2026-05-02 03:01:17,740][root][INFO] - 576 crystals generated so far, 575 unique components.  Burden: 1.6941176470588235, Div. Ratio: 0.9982638888888888.
+[2026-05-02 03:01:17,757][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:01:17,760][root][INFO] - replay buffer size=143
+[2026-05-02 03:01:17,760][root][INFO] - buffer reward mean=0.9616906627947777
+[2026-05-02 03:01:17,761][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.813230094601998, baseline_reward_std=0.1749967657241115, train_reward_mean=0.9638150102205265, train_reward_std=0.032046119701327966, n_all_success=64, n_train=16
+[2026-05-02 03:01:17,761][root][INFO] - Advantage stats [train]: adv_train_mean=0.8364, adv_train_std=0.1926, adv_train_min=0.4392, adv_train_max=1.0673, adv_train_pos_frac=1.0000
+[2026-05-02 03:01:17,765][root][INFO] - FINETUNE:
+[2026-05-02 03:01:49,246][root][INFO] - Epoch 0: loss: 0.2193, loss_diff: 0.2083, loss_kl: 0.4403
+[2026-05-02 03:02:20,540][root][INFO] - Epoch 1: loss: 0.2160, loss_diff: 0.2050, loss_kl: 0.4397
+[2026-05-02 03:02:51,784][root][INFO] - Epoch 2: loss: 0.2128, loss_diff: 0.2024, loss_kl: 0.4158
+[2026-05-02 03:02:51,786][root][INFO] - *****   LOOP 8 FINISH   *****
+[2026-05-02 03:02:51,787][root][INFO] - Total time taken: 5.03 min.
+
+
+[2026-05-02 03:02:51,787][root][INFO] - *****   LOOP 9 START   *****
+[2026-05-02 03:02:51,787][root][INFO] - SAMPLE:
+[2026-05-02 03:05:57,634][root][INFO] - 
+[2026-05-02 03:05:57,645][root][INFO] - SCORE:
+[2026-05-02 03:06:06,338][root][INFO] - Evaluation costs to date: 640
+[2026-05-02 03:06:06,339][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:06:06,339][root][INFO] - reward mean=0.8283 std=0.1581
+[2026-05-02 03:06:06,339][root][INFO] - ehull mean=0.0805 std=0.0864
+[2026-05-02 03:06:06,939][root][INFO] - 640 crystals generated so far, 637 unique components.  Burden: 1.6886543535620053, Div. Ratio: 0.9953125.
+[2026-05-02 03:06:06,956][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:06:06,958][root][INFO] - replay buffer size=158
+[2026-05-02 03:06:06,959][root][INFO] - buffer reward mean=0.9642090439376176
+[2026-05-02 03:06:06,959][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8283246773192853, baseline_reward_std=0.1581082185143874, train_reward_mean=0.987930124589395, train_reward_std=0.01569011893502828, n_all_success=64, n_train=16
+[2026-05-02 03:06:06,959][root][INFO] - Advantage stats [train]: adv_train_mean=0.9321, adv_train_std=0.1942, adv_train_min=0.3924, adv_train_max=1.0858, adv_train_pos_frac=1.0000
+[2026-05-02 03:06:06,960][root][INFO] - FINETUNE:
+[2026-05-02 03:06:41,777][root][INFO] - Epoch 0: loss: 0.2422, loss_diff: 0.2294, loss_kl: 0.5143
+[2026-05-02 03:07:16,430][root][INFO] - Epoch 1: loss: 0.2383, loss_diff: 0.2255, loss_kl: 0.5117
+[2026-05-02 03:07:51,087][root][INFO] - Epoch 2: loss: 0.2333, loss_diff: 0.2204, loss_kl: 0.5152
+[2026-05-02 03:07:51,090][root][INFO] - *****   LOOP 9 FINISH   *****
+[2026-05-02 03:07:51,090][root][INFO] - Total time taken: 4.99 min.
+
+
+[2026-05-02 03:07:51,236][root][INFO] - *****   LOOP 10 START   *****
+[2026-05-02 03:07:51,237][root][INFO] - SAMPLE:
+[2026-05-02 03:11:01,447][root][INFO] - 
+[2026-05-02 03:11:01,459][root][INFO] - SCORE:
+[2026-05-02 03:11:11,039][root][INFO] - Evaluation costs to date: 704
+[2026-05-02 03:11:11,040][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:11:11,040][root][INFO] - reward mean=0.8407 std=0.1748
+[2026-05-02 03:11:11,040][root][INFO] - ehull mean=0.0774 std=0.1188
+[2026-05-02 03:11:11,697][root][INFO] - 704 crystals generated so far, 701 unique components.  Burden: 1.648711943793911, Div. Ratio: 0.9957386363636364.
+[2026-05-02 03:11:11,714][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:11:11,717][root][INFO] - replay buffer size=174
+[2026-05-02 03:11:11,717][root][INFO] - buffer reward mean=0.9665552986481197
+[2026-05-02 03:11:11,718][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8407013304854494, baseline_reward_std=0.17478835221002967, train_reward_mean=0.9897245639143274, train_reward_std=0.014095239863388762, n_all_success=64, n_train=16
+[2026-05-02 03:11:11,718][root][INFO] - Advantage stats [train]: adv_train_mean=0.7599, adv_train_std=0.1730, adv_train_min=0.4458, adv_train_max=0.9114, adv_train_pos_frac=1.0000
+[2026-05-02 03:11:11,718][root][INFO] - FINETUNE:
+[2026-05-02 03:11:45,504][root][INFO] - Epoch 0: loss: 0.1982, loss_diff: 0.1854, loss_kl: 0.5123
+[2026-05-02 03:12:19,122][root][INFO] - Epoch 1: loss: 0.1952, loss_diff: 0.1833, loss_kl: 0.4752
+[2026-05-02 03:12:52,725][root][INFO] - Epoch 2: loss: 0.1924, loss_diff: 0.1803, loss_kl: 0.4841
+[2026-05-02 03:12:52,727][root][INFO] - *****   LOOP 10 FINISH   *****
+[2026-05-02 03:12:52,727][root][INFO] - Total time taken: 5.02 min.
+
+
+[2026-05-02 03:12:52,728][root][INFO] - *****   LOOP 11 START   *****
+[2026-05-02 03:12:52,728][root][INFO] - SAMPLE:
+[2026-05-02 03:15:57,270][root][INFO] - 
+[2026-05-02 03:15:57,281][root][INFO] - SCORE:
+[2026-05-02 03:16:05,713][root][INFO] - Evaluation costs to date: 768
+[2026-05-02 03:16:05,713][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:16:05,713][root][INFO] - reward mean=0.8085 std=0.1644
+[2026-05-02 03:16:05,714][root][INFO] - ehull mean=0.0886 std=0.0925
+[2026-05-02 03:16:06,422][root][INFO] - 768 crystals generated so far, 764 unique components.  Burden: 1.6445396145610278, Div. Ratio: 0.9947916666666666.
+[2026-05-02 03:16:06,440][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:16:06,443][root][INFO] - replay buffer size=189
+[2026-05-02 03:16:06,443][root][INFO] - buffer reward mean=0.9674555312355326
+[2026-05-02 03:16:06,443][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8085423652936297, baseline_reward_std=0.16440761344052335, train_reward_mean=0.9792795899214279, train_reward_std=0.024441685797219965, n_all_success=64, n_train=16
+[2026-05-02 03:16:06,444][root][INFO] - Advantage stats [train]: adv_train_mean=1.0126, adv_train_std=0.1729, adv_train_min=0.6553, adv_train_max=1.1645, adv_train_pos_frac=1.0000
+[2026-05-02 03:16:06,444][root][INFO] - FINETUNE:
+[2026-05-02 03:16:35,593][root][INFO] - Epoch 0: loss: 0.2358, loss_diff: 0.2255, loss_kl: 0.4125
+[2026-05-02 03:17:04,524][root][INFO] - Epoch 1: loss: 0.2302, loss_diff: 0.2191, loss_kl: 0.4453
+[2026-05-02 03:17:33,439][root][INFO] - Epoch 2: loss: 0.2289, loss_diff: 0.2182, loss_kl: 0.4267
+[2026-05-02 03:17:33,441][root][INFO] - *****   LOOP 11 FINISH   *****
+[2026-05-02 03:17:33,442][root][INFO] - Total time taken: 4.68 min.
+
+
+[2026-05-02 03:17:33,442][root][INFO] - *****   LOOP 12 START   *****
+[2026-05-02 03:17:33,443][root][INFO] - SAMPLE:
+[2026-05-02 03:20:48,015][root][INFO] - 
+[2026-05-02 03:20:48,026][root][INFO] - SCORE:
+[2026-05-02 03:20:57,711][root][INFO] - Evaluation costs to date: 832
+[2026-05-02 03:20:57,712][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:20:57,712][root][INFO] - reward mean=0.8165 std=0.1984
+[2026-05-02 03:20:57,712][root][INFO] - ehull mean=0.0867 std=0.1047
+[2026-05-02 03:20:58,480][root][INFO] - 832 crystals generated so far, 828 unique components.  Burden: 1.625, Div. Ratio: 0.9951923076923077.
+[2026-05-02 03:20:58,500][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:20:58,502][root][INFO] - replay buffer size=205
+[2026-05-02 03:20:58,503][root][INFO] - buffer reward mean=0.9691032351922433
+[2026-05-02 03:20:58,503][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8164991553500794, baseline_reward_std=0.19838275351225995, train_reward_mean=0.9885667381808878, train_reward_std=0.014595262059200292, n_all_success=64, n_train=16
+[2026-05-02 03:20:58,503][root][INFO] - Advantage stats [train]: adv_train_mean=0.8484, adv_train_std=0.1056, adv_train_min=0.4839, adv_train_max=0.9250, adv_train_pos_frac=1.0000
+[2026-05-02 03:20:58,504][root][INFO] - FINETUNE:
+[2026-05-02 03:21:33,794][root][INFO] - Epoch 0: loss: 0.2236, loss_diff: 0.2101, loss_kl: 0.5399
+[2026-05-02 03:22:08,874][root][INFO] - Epoch 1: loss: 0.2201, loss_diff: 0.2073, loss_kl: 0.5104
+[2026-05-02 03:22:43,920][root][INFO] - Epoch 2: loss: 0.2167, loss_diff: 0.2044, loss_kl: 0.4922
+[2026-05-02 03:22:43,922][root][INFO] - *****   LOOP 12 FINISH   *****
+[2026-05-02 03:22:43,923][root][INFO] - Total time taken: 5.17 min.
+
+
+[2026-05-02 03:22:43,924][root][INFO] - *****   LOOP 13 START   *****
+[2026-05-02 03:22:43,924][root][INFO] - SAMPLE:
+[2026-05-02 03:25:47,305][root][INFO] - 
+[2026-05-02 03:25:47,318][root][INFO] - SCORE:
+[2026-05-02 03:25:58,796][root][INFO] - Evaluation costs to date: 896
+[2026-05-02 03:25:58,797][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:25:58,797][root][INFO] - reward mean=0.8269 std=0.2102
+[2026-05-02 03:25:58,797][root][INFO] - ehull mean=0.0886 std=0.1468
+[2026-05-02 03:25:59,633][root][INFO] - 896 crystals generated so far, 889 unique components.  Burden: 1.620253164556962, Div. Ratio: 0.9921875.
+[2026-05-02 03:25:59,651][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:25:59,654][root][INFO] - replay buffer size=220
+[2026-05-02 03:25:59,654][root][INFO] - buffer reward mean=0.9707071775854135
+[2026-05-02 03:25:59,655][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8269424821778626, baseline_reward_std=0.21016401126016293, train_reward_mean=0.9930884908988187, train_reward_std=0.009956445133799945, n_all_success=64, n_train=16
+[2026-05-02 03:25:59,655][root][INFO] - Advantage stats [train]: adv_train_mean=0.7114, adv_train_std=0.1343, adv_train_min=0.3907, adv_train_max=0.8234, adv_train_pos_frac=1.0000
+[2026-05-02 03:25:59,655][root][INFO] - FINETUNE:
+[2026-05-02 03:26:28,676][root][INFO] - Epoch 0: loss: 0.1572, loss_diff: 0.1475, loss_kl: 0.3895
+[2026-05-02 03:26:57,510][root][INFO] - Epoch 1: loss: 0.1542, loss_diff: 0.1442, loss_kl: 0.3992
+[2026-05-02 03:27:26,328][root][INFO] - Epoch 2: loss: 0.1516, loss_diff: 0.1419, loss_kl: 0.3908
+[2026-05-02 03:27:26,330][root][INFO] - *****   LOOP 13 FINISH   *****
+[2026-05-02 03:27:26,330][root][INFO] - Total time taken: 4.71 min.
+
+
+[2026-05-02 03:27:26,331][root][INFO] - *****   LOOP 14 START   *****
+[2026-05-02 03:27:26,331][root][INFO] - SAMPLE:
+[2026-05-02 03:30:26,009][root][INFO] - 
+[2026-05-02 03:30:26,020][root][INFO] - SCORE:
+[2026-05-02 03:30:36,001][root][INFO] - Evaluation costs to date: 960
+[2026-05-02 03:30:36,002][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:30:36,002][root][INFO] - reward mean=0.8396 std=0.1613
+[2026-05-02 03:30:36,002][root][INFO] - ehull mean=0.0704 std=0.0930
+[2026-05-02 03:30:36,902][root][INFO] - 960 crystals generated so far, 952 unique components.  Burden: 1.6188870151770658, Div. Ratio: 0.9916666666666667.
+[2026-05-02 03:30:36,922][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:30:36,925][root][INFO] - replay buffer size=235
+[2026-05-02 03:30:36,925][root][INFO] - buffer reward mean=0.9721836194367455
+[2026-05-02 03:30:36,925][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8395798693271809, baseline_reward_std=0.16127172428973283, train_reward_mean=0.994223218677763, train_reward_std=0.011186204528860034, n_all_success=64, n_train=16
+[2026-05-02 03:30:36,926][root][INFO] - Advantage stats [train]: adv_train_mean=0.8989, adv_train_std=0.1380, adv_train_min=0.5742, adv_train_max=0.9947, adv_train_pos_frac=1.0000
+[2026-05-02 03:30:36,926][root][INFO] - FINETUNE:
+[2026-05-02 03:31:10,866][root][INFO] - Epoch 0: loss: 0.2301, loss_diff: 0.2167, loss_kl: 0.5354
+[2026-05-02 03:31:44,596][root][INFO] - Epoch 1: loss: 0.2252, loss_diff: 0.2134, loss_kl: 0.4717
+[2026-05-02 03:32:18,300][root][INFO] - Epoch 2: loss: 0.2240, loss_diff: 0.2117, loss_kl: 0.4931
+[2026-05-02 03:32:18,302][root][INFO] - *****   LOOP 14 FINISH   *****
+[2026-05-02 03:32:18,303][root][INFO] - Total time taken: 4.87 min.
+
+
+[2026-05-02 03:32:18,304][root][INFO] - *****   LOOP 15 START   *****
+[2026-05-02 03:32:18,304][root][INFO] - SAMPLE:
+[2026-05-02 03:35:28,784][root][INFO] - 
+[2026-05-02 03:35:28,796][root][INFO] - SCORE:
+[2026-05-02 03:35:38,094][root][INFO] - Evaluation costs to date: 1024
+[2026-05-02 03:35:38,094][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:35:38,094][root][INFO] - reward mean=0.8625 std=0.1519
+[2026-05-02 03:35:38,095][root][INFO] - ehull mean=0.0592 std=0.0870
+[2026-05-02 03:35:39,218][root][INFO] - 1024 crystals generated so far, 1014 unique components.  Burden: 1.6050156739811912, Div. Ratio: 0.990234375.
+[2026-05-02 03:35:39,238][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:35:39,241][root][INFO] - replay buffer size=250
+[2026-05-02 03:35:39,241][root][INFO] - buffer reward mean=0.9738526022705407
+[2026-05-02 03:35:39,242][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8625277927818776, baseline_reward_std=0.15191745651889318, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 03:35:39,242][root][INFO] - Advantage stats [train]: adv_train_mean=0.8335, adv_train_std=0.1649, adv_train_min=0.1833, adv_train_max=0.9049, adv_train_pos_frac=1.0000
+[2026-05-02 03:35:39,242][root][INFO] - FINETUNE:
+[2026-05-02 03:36:16,234][root][INFO] - Epoch 0: loss: 0.2222, loss_diff: 0.2091, loss_kl: 0.5245
+[2026-05-02 03:36:53,031][root][INFO] - Epoch 1: loss: 0.2173, loss_diff: 0.2045, loss_kl: 0.5102
+[2026-05-02 03:37:29,850][root][INFO] - Epoch 2: loss: 0.2154, loss_diff: 0.2027, loss_kl: 0.5074
+[2026-05-02 03:37:29,853][root][INFO] - *****   LOOP 15 FINISH   *****
+[2026-05-02 03:37:29,853][root][INFO] - Total time taken: 5.19 min.
+
+
+[2026-05-02 03:37:29,854][root][INFO] - *****   LOOP 16 START   *****
+[2026-05-02 03:37:29,854][root][INFO] - SAMPLE:
+[2026-05-02 03:40:39,379][root][INFO] - 
+[2026-05-02 03:40:39,391][root][INFO] - SCORE:
+[2026-05-02 03:40:49,088][root][INFO] - Evaluation costs to date: 1088
+[2026-05-02 03:40:49,088][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:40:49,089][root][INFO] - reward mean=0.8405 std=0.1991
+[2026-05-02 03:40:49,089][root][INFO] - ehull mean=0.0769 std=0.1396
+[2026-05-02 03:40:50,085][root][INFO] - 1088 crystals generated so far, 1078 unique components.  Burden: 1.5883211678832116, Div. Ratio: 0.9908088235294118.
+[2026-05-02 03:40:50,106][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:40:50,109][root][INFO] - replay buffer size=266
+[2026-05-02 03:40:50,110][root][INFO] - buffer reward mean=0.97518243054553
+[2026-05-02 03:40:50,110][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8404972957885037, baseline_reward_std=0.1990954242858697, train_reward_mean=0.9959609973422372, train_reward_std=0.0075291566496834186, n_all_success=64, n_train=16
+[2026-05-02 03:40:50,110][root][INFO] - Advantage stats [train]: adv_train_mean=0.7234, adv_train_std=0.1174, adv_train_min=0.3947, adv_train_max=0.8011, adv_train_pos_frac=1.0000
+[2026-05-02 03:40:50,111][root][INFO] - FINETUNE:
+[2026-05-02 03:41:24,934][root][INFO] - Epoch 0: loss: 0.1905, loss_diff: 0.1781, loss_kl: 0.4962
+[2026-05-02 03:41:59,579][root][INFO] - Epoch 1: loss: 0.1871, loss_diff: 0.1762, loss_kl: 0.4350
+[2026-05-02 03:42:34,242][root][INFO] - Epoch 2: loss: 0.1841, loss_diff: 0.1728, loss_kl: 0.4497
+[2026-05-02 03:42:34,244][root][INFO] - *****   LOOP 16 FINISH   *****
+[2026-05-02 03:42:34,245][root][INFO] - Total time taken: 5.07 min.
+
+
+[2026-05-02 03:42:34,245][root][INFO] - *****   LOOP 17 START   *****
+[2026-05-02 03:42:34,246][root][INFO] - SAMPLE:
+[2026-05-02 03:45:39,241][root][INFO] - 
+[2026-05-02 03:45:39,252][root][INFO] - SCORE:
+[2026-05-02 03:45:47,894][root][INFO] - Evaluation costs to date: 1152
+[2026-05-02 03:45:47,894][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:45:47,894][root][INFO] - reward mean=0.8645 std=0.2046
+[2026-05-02 03:45:47,895][root][INFO] - ehull mean=0.0609 std=0.1220
+[2026-05-02 03:45:48,987][root][INFO] - 1152 crystals generated so far, 1142 unique components.  Burden: 1.5588633288227334, Div. Ratio: 0.9913194444444444.
+[2026-05-02 03:45:49,009][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:45:49,012][root][INFO] - replay buffer size=282
+[2026-05-02 03:45:49,012][root][INFO] - buffer reward mean=0.9765905195925919
+[2026-05-02 03:45:49,013][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8644567958978381, baseline_reward_std=0.20460372286218909, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 03:45:49,013][root][INFO] - Advantage stats [train]: adv_train_mean=0.5895, adv_train_std=0.1355, adv_train_min=0.2096, adv_train_max=0.6625, adv_train_pos_frac=1.0000
+[2026-05-02 03:45:49,014][root][INFO] - FINETUNE:
+[2026-05-02 03:46:23,892][root][INFO] - Epoch 0: loss: 0.1499, loss_diff: 0.1384, loss_kl: 0.4570
+[2026-05-02 03:46:58,571][root][INFO] - Epoch 1: loss: 0.1472, loss_diff: 0.1364, loss_kl: 0.4318
+[2026-05-02 03:47:33,205][root][INFO] - Epoch 2: loss: 0.1458, loss_diff: 0.1350, loss_kl: 0.4294
+[2026-05-02 03:47:33,208][root][INFO] - *****   LOOP 17 FINISH   *****
+[2026-05-02 03:47:33,208][root][INFO] - Total time taken: 4.98 min.
+
+
+[2026-05-02 03:47:33,209][root][INFO] - *****   LOOP 18 START   *****
+[2026-05-02 03:47:33,209][root][INFO] - SAMPLE:
+[2026-05-02 03:50:30,624][root][INFO] - 
+[2026-05-02 03:50:30,636][root][INFO] - SCORE:
+[2026-05-02 03:50:41,656][root][INFO] - Evaluation costs to date: 1216
+[2026-05-02 03:50:41,657][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:50:41,657][root][INFO] - reward mean=0.8599 std=0.1962
+[2026-05-02 03:50:41,657][root][INFO] - ehull mean=0.0628 std=0.1058
+[2026-05-02 03:50:42,804][root][INFO] - 1216 crystals generated so far, 1204 unique components.  Burden: 1.541191381495564, Div. Ratio: 0.9901315789473685.
+[2026-05-02 03:50:42,827][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:50:42,830][root][INFO] - replay buffer size=296
+[2026-05-02 03:50:42,830][root][INFO] - buffer reward mean=0.977337720794862
+[2026-05-02 03:50:42,830][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.859942616997936, baseline_reward_std=0.19618159959097572, train_reward_mean=0.9933399268855112, train_reward_std=0.008034408200141199, n_all_success=64, n_train=16
+[2026-05-02 03:50:42,831][root][INFO] - Advantage stats [train]: adv_train_mean=0.6417, adv_train_std=0.1154, adv_train_min=0.2837, adv_train_max=0.7139, adv_train_pos_frac=1.0000
+[2026-05-02 03:50:42,831][root][INFO] - FINETUNE:
+[2026-05-02 03:51:16,024][root][INFO] - Epoch 0: loss: 0.1571, loss_diff: 0.1458, loss_kl: 0.4506
+[2026-05-02 03:51:49,052][root][INFO] - Epoch 1: loss: 0.1541, loss_diff: 0.1430, loss_kl: 0.4464
+[2026-05-02 03:52:21,968][root][INFO] - Epoch 2: loss: 0.1528, loss_diff: 0.1422, loss_kl: 0.4217
+[2026-05-02 03:52:21,970][root][INFO] - *****   LOOP 18 FINISH   *****
+[2026-05-02 03:52:21,971][root][INFO] - Total time taken: 4.81 min.
+
+
+[2026-05-02 03:52:21,971][root][INFO] - *****   LOOP 19 START   *****
+[2026-05-02 03:52:21,971][root][INFO] - SAMPLE:
+[2026-05-02 03:55:29,864][root][INFO] - 
+[2026-05-02 03:55:29,876][root][INFO] - SCORE:
+[2026-05-02 03:55:38,962][root][INFO] - Evaluation costs to date: 1280
+[2026-05-02 03:55:38,963][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 03:55:38,963][root][INFO] - reward mean=0.8471 std=0.1488
+[2026-05-02 03:55:38,963][root][INFO] - ehull mean=0.0714 std=0.0812
+[2026-05-02 03:55:40,136][root][INFO] - 1280 crystals generated so far, 1266 unique components.  Burden: 1.5366146458583434, Div. Ratio: 0.9890625.
+[2026-05-02 03:55:40,160][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 03:55:40,163][root][INFO] - replay buffer size=300
+[2026-05-02 03:55:40,163][root][INFO] - buffer reward mean=0.9810237294100363
+[2026-05-02 03:55:40,164][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8471215231229916, baseline_reward_std=0.14876030044857022, train_reward_mean=0.9927382096101107, train_reward_std=0.01111250864925325, n_all_success=64, n_train=16
+[2026-05-02 03:55:40,164][root][INFO] - Advantage stats [train]: adv_train_mean=0.9010, adv_train_std=0.1643, adv_train_min=0.4048, adv_train_max=1.0277, adv_train_pos_frac=1.0000
+[2026-05-02 03:55:40,164][root][INFO] - FINETUNE:
+[2026-05-02 03:56:12,182][root][INFO] - Epoch 0: loss: 0.2169, loss_diff: 0.2066, loss_kl: 0.4119
+[2026-05-02 03:56:43,936][root][INFO] - Epoch 1: loss: 0.2128, loss_diff: 0.2014, loss_kl: 0.4547
+[2026-05-02 03:57:15,651][root][INFO] - Epoch 2: loss: 0.2094, loss_diff: 0.1970, loss_kl: 0.4934
+[2026-05-02 03:57:15,654][root][INFO] - *****   LOOP 19 FINISH   *****
+[2026-05-02 03:57:15,654][root][INFO] - Total time taken: 4.89 min.
+
+
+[2026-05-02 03:57:15,785][root][INFO] - *****   LOOP 20 START   *****
+[2026-05-02 03:57:15,785][root][INFO] - SAMPLE:
+[2026-05-02 04:00:21,444][root][INFO] - 
+[2026-05-02 04:00:21,455][root][INFO] - SCORE:
+[2026-05-02 04:00:31,993][root][INFO] - Evaluation costs to date: 1344
+[2026-05-02 04:00:31,993][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:00:31,993][root][INFO] - reward mean=0.8341 std=0.1570
+[2026-05-02 04:00:31,994][root][INFO] - ehull mean=0.0786 std=0.0841
+[2026-05-02 04:00:33,221][root][INFO] - 1344 crystals generated so far, 1327 unique components.  Burden: 1.5412844036697249, Div. Ratio: 0.9873511904761905.
+[2026-05-02 04:00:33,245][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:00:33,248][root][INFO] - replay buffer size=300
+[2026-05-02 04:00:33,249][root][INFO] - buffer reward mean=0.9843192081381715
+[2026-05-02 04:00:33,249][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8341008594532027, baseline_reward_std=0.15699360992509778, train_reward_mean=0.9883920062403793, train_reward_std=0.016952918757135484, n_all_success=64, n_train=16
+[2026-05-02 04:00:33,250][root][INFO] - Advantage stats [train]: adv_train_mean=0.9887, adv_train_std=0.0950, adv_train_min=0.7517, adv_train_max=1.0567, adv_train_pos_frac=1.0000
+[2026-05-02 04:00:33,250][root][INFO] - FINETUNE:
+[2026-05-02 04:01:07,983][root][INFO] - Epoch 0: loss: 0.2417, loss_diff: 0.2279, loss_kl: 0.5499
+[2026-05-02 04:01:42,519][root][INFO] - Epoch 1: loss: 0.2371, loss_diff: 0.2237, loss_kl: 0.5373
+[2026-05-02 04:02:17,024][root][INFO] - Epoch 2: loss: 0.2340, loss_diff: 0.2204, loss_kl: 0.5453
+[2026-05-02 04:02:17,026][root][INFO] - *****   LOOP 20 FINISH   *****
+[2026-05-02 04:02:17,027][root][INFO] - Total time taken: 5.02 min.
+
+
+[2026-05-02 04:02:17,028][root][INFO] - *****   LOOP 21 START   *****
+[2026-05-02 04:02:17,028][root][INFO] - SAMPLE:
+[2026-05-02 04:05:27,320][root][INFO] - 
+[2026-05-02 04:05:27,333][root][INFO] - SCORE:
+[2026-05-02 04:05:38,982][root][INFO] - Evaluation costs to date: 1408
+[2026-05-02 04:05:38,982][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:05:38,982][root][INFO] - reward mean=0.8617 std=0.1631
+[2026-05-02 04:05:38,983][root][INFO] - ehull mean=0.0564 std=0.0945
+[2026-05-02 04:05:40,293][root][INFO] - 1408 crystals generated so far, 1389 unique components.  Burden: 1.5387978142076504, Div. Ratio: 0.9865056818181818.
+[2026-05-02 04:05:40,318][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:05:40,321][root][INFO] - replay buffer size=300
+[2026-05-02 04:05:40,321][root][INFO] - buffer reward mean=0.9875654690245229
+[2026-05-02 04:05:40,321][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8616621745169399, baseline_reward_std=0.16308605417838587, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:05:40,322][root][INFO] - Advantage stats [train]: adv_train_mean=0.7992, adv_train_std=0.1089, adv_train_min=0.4228, adv_train_max=0.8483, adv_train_pos_frac=1.0000
+[2026-05-02 04:05:40,322][root][INFO] - FINETUNE:
+[2026-05-02 04:06:15,509][root][INFO] - Epoch 0: loss: 0.1972, loss_diff: 0.1826, loss_kl: 0.5834
+[2026-05-02 04:06:50,530][root][INFO] - Epoch 1: loss: 0.1938, loss_diff: 0.1795, loss_kl: 0.5727
+[2026-05-02 04:07:25,499][root][INFO] - Epoch 2: loss: 0.1923, loss_diff: 0.1785, loss_kl: 0.5533
+[2026-05-02 04:07:25,501][root][INFO] - *****   LOOP 21 FINISH   *****
+[2026-05-02 04:07:25,502][root][INFO] - Total time taken: 5.14 min.
+
+
+[2026-05-02 04:07:25,503][root][INFO] - *****   LOOP 22 START   *****
+[2026-05-02 04:07:25,503][root][INFO] - SAMPLE:
+[2026-05-02 04:10:26,930][root][INFO] - 
+[2026-05-02 04:10:26,941][root][INFO] - SCORE:
+[2026-05-02 04:10:36,408][root][INFO] - Evaluation costs to date: 1472
+[2026-05-02 04:10:36,409][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:10:36,409][root][INFO] - reward mean=0.8359 std=0.1965
+[2026-05-02 04:10:36,409][root][INFO] - ehull mean=0.0696 std=0.1108
+[2026-05-02 04:10:37,786][root][INFO] - 1472 crystals generated so far, 1451 unique components.  Burden: 1.5365344467640918, Div. Ratio: 0.985733695652174.
+[2026-05-02 04:10:37,811][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:10:37,814][root][INFO] - replay buffer size=300
+[2026-05-02 04:10:37,815][root][INFO] - buffer reward mean=0.9904053968956006
+[2026-05-02 04:10:37,815][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8358575945900887, baseline_reward_std=0.196465094065895, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:10:37,815][root][INFO] - Advantage stats [train]: adv_train_mean=0.8032, adv_train_std=0.0739, adv_train_min=0.5332, adv_train_max=0.8355, adv_train_pos_frac=1.0000
+[2026-05-02 04:10:37,816][root][INFO] - FINETUNE:
+[2026-05-02 04:11:13,263][root][INFO] - Epoch 0: loss: 0.1753, loss_diff: 0.1609, loss_kl: 0.5742
+[2026-05-02 04:11:48,574][root][INFO] - Epoch 1: loss: 0.1725, loss_diff: 0.1577, loss_kl: 0.5945
+[2026-05-02 04:12:23,823][root][INFO] - Epoch 2: loss: 0.1707, loss_diff: 0.1563, loss_kl: 0.5735
+[2026-05-02 04:12:23,825][root][INFO] - *****   LOOP 22 FINISH   *****
+[2026-05-02 04:12:23,825][root][INFO] - Total time taken: 4.97 min.
+
+
+[2026-05-02 04:12:23,826][root][INFO] - *****   LOOP 23 START   *****
+[2026-05-02 04:12:23,826][root][INFO] - SAMPLE:
+[2026-05-02 04:15:33,201][root][INFO] - 
+[2026-05-02 04:15:33,213][root][INFO] - SCORE:
+[2026-05-02 04:15:42,839][root][INFO] - Evaluation costs to date: 1536
+[2026-05-02 04:15:42,840][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:15:42,840][root][INFO] - reward mean=0.8582 std=0.1714
+[2026-05-02 04:15:42,841][root][INFO] - ehull mean=0.0624 std=0.1128
+[2026-05-02 04:15:44,271][root][INFO] - 1536 crystals generated so far, 1514 unique components.  Burden: 1.5298804780876494, Div. Ratio: 0.9856770833333334.
+[2026-05-02 04:15:44,297][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:15:44,300][root][INFO] - replay buffer size=300
+[2026-05-02 04:15:44,300][root][INFO] - buffer reward mean=0.9927280073940341
+[2026-05-02 04:15:44,301][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8581512810539729, baseline_reward_std=0.1714420692137327, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:15:44,301][root][INFO] - Advantage stats [train]: adv_train_mean=0.8192, adv_train_std=0.0347, adv_train_min=0.6382, adv_train_max=0.8274, adv_train_pos_frac=1.0000
+[2026-05-02 04:15:44,301][root][INFO] - FINETUNE:
+[2026-05-02 04:16:22,015][root][INFO] - Epoch 0: loss: 0.1974, loss_diff: 0.1822, loss_kl: 0.6106
+[2026-05-02 04:16:59,550][root][INFO] - Epoch 1: loss: 0.1942, loss_diff: 0.1798, loss_kl: 0.5740
+[2026-05-02 04:17:37,069][root][INFO] - Epoch 2: loss: 0.1925, loss_diff: 0.1785, loss_kl: 0.5605
+[2026-05-02 04:17:37,072][root][INFO] - *****   LOOP 23 FINISH   *****
+[2026-05-02 04:17:37,072][root][INFO] - Total time taken: 5.22 min.
+
+
+[2026-05-02 04:17:37,073][root][INFO] - *****   LOOP 24 START   *****
+[2026-05-02 04:17:37,073][root][INFO] - SAMPLE:
+[2026-05-02 04:20:39,196][root][INFO] - 
+[2026-05-02 04:20:39,208][root][INFO] - SCORE:
+[2026-05-02 04:20:48,781][root][INFO] - Evaluation costs to date: 1600
+[2026-05-02 04:20:48,781][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:20:48,782][root][INFO] - reward mean=0.8393 std=0.2306
+[2026-05-02 04:20:48,782][root][INFO] - ehull mean=0.0758 std=0.1425
+[2026-05-02 04:20:50,252][root][INFO] - 1600 crystals generated so far, 1573 unique components.  Burden: 1.5267175572519085, Div. Ratio: 0.983125.
+[2026-05-02 04:20:50,280][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:20:50,283][root][INFO] - replay buffer size=300
+[2026-05-02 04:20:50,283][root][INFO] - buffer reward mean=0.9946399562008325
+[2026-05-02 04:20:50,284][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8392762686156421, baseline_reward_std=0.23056037626412504, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:20:50,284][root][INFO] - Advantage stats [train]: adv_train_mean=0.6808, adv_train_std=0.0396, adv_train_min=0.5269, adv_train_max=0.6971, adv_train_pos_frac=1.0000
+[2026-05-02 04:20:50,285][root][INFO] - FINETUNE:
+[2026-05-02 04:21:25,748][root][INFO] - Epoch 0: loss: 0.1640, loss_diff: 0.1499, loss_kl: 0.5632
+[2026-05-02 04:22:01,007][root][INFO] - Epoch 1: loss: 0.1604, loss_diff: 0.1480, loss_kl: 0.4956
+[2026-05-02 04:22:36,261][root][INFO] - Epoch 2: loss: 0.1592, loss_diff: 0.1469, loss_kl: 0.4943
+[2026-05-02 04:22:36,263][root][INFO] - *****   LOOP 24 FINISH   *****
+[2026-05-02 04:22:36,264][root][INFO] - Total time taken: 4.99 min.
+
+
+[2026-05-02 04:22:36,264][root][INFO] - *****   LOOP 25 START   *****
+[2026-05-02 04:22:36,265][root][INFO] - SAMPLE:
+[2026-05-02 04:25:41,819][root][INFO] - 
+[2026-05-02 04:25:41,831][root][INFO] - SCORE:
+[2026-05-02 04:25:49,129][root][INFO] - Evaluation costs to date: 1664
+[2026-05-02 04:25:49,130][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:25:49,130][root][INFO] - reward mean=0.8718 std=0.1763
+[2026-05-02 04:25:49,130][root][INFO] - ehull mean=0.0488 std=0.1036
+[2026-05-02 04:25:50,650][root][INFO] - 1664 crystals generated so far, 1633 unique components.  Burden: 1.5238095238095237, Div. Ratio: 0.9813701923076923.
+[2026-05-02 04:25:50,677][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:25:50,680][root][INFO] - replay buffer size=300
+[2026-05-02 04:25:50,680][root][INFO] - buffer reward mean=0.9961301132527164
+[2026-05-02 04:25:50,681][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8717536466551428, baseline_reward_std=0.1762737475979354, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:25:50,681][root][INFO] - Advantage stats [train]: adv_train_mean=0.7145, adv_train_std=0.0407, adv_train_min=0.5814, adv_train_max=0.7275, adv_train_pos_frac=1.0000
+[2026-05-02 04:25:50,681][root][INFO] - FINETUNE:
+[2026-05-02 04:26:27,572][root][INFO] - Epoch 0: loss: 0.1651, loss_diff: 0.1522, loss_kl: 0.5129
+[2026-05-02 04:27:04,272][root][INFO] - Epoch 1: loss: 0.1631, loss_diff: 0.1492, loss_kl: 0.5536
+[2026-05-02 04:27:40,946][root][INFO] - Epoch 2: loss: 0.1621, loss_diff: 0.1484, loss_kl: 0.5448
+[2026-05-02 04:27:40,949][root][INFO] - *****   LOOP 25 FINISH   *****
+[2026-05-02 04:27:40,949][root][INFO] - Total time taken: 5.08 min.
+
+
+[2026-05-02 04:27:40,950][root][INFO] - *****   LOOP 26 START   *****
+[2026-05-02 04:27:40,950][root][INFO] - SAMPLE:
+[2026-05-02 04:30:36,454][root][INFO] - 
+[2026-05-02 04:30:36,465][root][INFO] - SCORE:
+[2026-05-02 04:30:43,967][root][INFO] - Evaluation costs to date: 1728
+[2026-05-02 04:30:43,967][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:30:43,968][root][INFO] - reward mean=0.8626 std=0.1457
+[2026-05-02 04:30:43,968][root][INFO] - ehull mean=0.0545 std=0.0891
+[2026-05-02 04:30:45,553][root][INFO] - 1728 crystals generated so far, 1693 unique components.  Burden: 1.5251544571932922, Div. Ratio: 0.9797453703703703.
+[2026-05-02 04:30:45,585][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:30:45,589][root][INFO] - replay buffer size=300
+[2026-05-02 04:30:45,589][root][INFO] - buffer reward mean=0.9972797097280424
+[2026-05-02 04:30:45,590][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8625683439778871, baseline_reward_std=0.14574428052635047, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:30:45,591][root][INFO] - Advantage stats [train]: adv_train_mean=0.9341, adv_train_std=0.0315, adv_train_min=0.7810, adv_train_max=0.9430, adv_train_pos_frac=1.0000
+[2026-05-02 04:30:45,591][root][INFO] - FINETUNE:
+[2026-05-02 04:31:23,488][root][INFO] - Epoch 0: loss: 0.2147, loss_diff: 0.2003, loss_kl: 0.5755
+[2026-05-02 04:32:01,179][root][INFO] - Epoch 1: loss: 0.2117, loss_diff: 0.1965, loss_kl: 0.6066
+[2026-05-02 04:32:38,827][root][INFO] - Epoch 2: loss: 0.2103, loss_diff: 0.1948, loss_kl: 0.6223
+[2026-05-02 04:32:38,829][root][INFO] - *****   LOOP 26 FINISH   *****
+[2026-05-02 04:32:38,830][root][INFO] - Total time taken: 4.96 min.
+
+
+[2026-05-02 04:32:38,830][root][INFO] - *****   LOOP 27 START   *****
+[2026-05-02 04:32:38,830][root][INFO] - SAMPLE:
+[2026-05-02 04:35:36,433][root][INFO] - 
+[2026-05-02 04:35:36,445][root][INFO] - SCORE:
+[2026-05-02 04:35:43,986][root][INFO] - Evaluation costs to date: 1792
+[2026-05-02 04:35:43,986][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:35:43,987][root][INFO] - reward mean=0.8910 std=0.1594
+[2026-05-02 04:35:43,987][root][INFO] - ehull mean=0.0348 std=0.0986
+[2026-05-02 04:35:45,714][root][INFO] - 1792 crystals generated so far, 1752 unique components.  Burden: 1.5212224108658743, Div. Ratio: 0.9776785714285714.
+[2026-05-02 04:35:45,743][root][INFO] - Diversity filter: tol_n=0, buff_n=0
+[2026-05-02 04:35:45,746][root][INFO] - replay buffer size=300
+[2026-05-02 04:35:45,746][root][INFO] - buffer reward mean=0.9983725680909845
+[2026-05-02 04:35:45,747][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8909642948988337, baseline_reward_std=0.15939691377686457, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:35:45,747][root][INFO] - Advantage stats [train]: adv_train_mean=0.6792, adv_train_std=0.0268, adv_train_min=0.5298, adv_train_max=0.6841, adv_train_pos_frac=1.0000
+[2026-05-02 04:35:45,748][root][INFO] - FINETUNE:
+[2026-05-02 04:36:20,642][root][INFO] - Epoch 0: loss: 0.1478, loss_diff: 0.1333, loss_kl: 0.5799
+[2026-05-02 04:36:55,306][root][INFO] - Epoch 1: loss: 0.1463, loss_diff: 0.1329, loss_kl: 0.5342
+[2026-05-02 04:37:29,937][root][INFO] - Epoch 2: loss: 0.1439, loss_diff: 0.1303, loss_kl: 0.5445
+[2026-05-02 04:37:29,939][root][INFO] - *****   LOOP 27 FINISH   *****
+[2026-05-02 04:37:29,940][root][INFO] - Total time taken: 4.85 min.
+
+
+[2026-05-02 04:37:29,940][root][INFO] - *****   LOOP 28 START   *****
+[2026-05-02 04:37:29,941][root][INFO] - SAMPLE:
+[2026-05-02 04:40:30,104][root][INFO] - 
+[2026-05-02 04:40:30,117][root][INFO] - SCORE:
+[2026-05-02 04:40:38,571][root][INFO] - Evaluation costs to date: 1856
+[2026-05-02 04:40:38,572][root][INFO] - Number of samples that successfully obtained rewards: 64
+[2026-05-02 04:40:38,572][root][INFO] - reward mean=0.8917 std=0.1336
+[2026-05-02 04:40:38,572][root][INFO] - ehull mean=0.0352 std=0.0880
+[2026-05-02 04:40:40,287][root][INFO] - 1856 crystals generated so far, 1808 unique components.  Burden: 1.517579721995094, Div. Ratio: 0.9741379310344828.
+[2026-05-02 04:40:40,316][root][INFO] - Diversity filter: tol_n=1, buff_n=0
+[2026-05-02 04:40:40,319][root][INFO] - replay buffer size=300
+[2026-05-02 04:40:40,319][root][INFO] - buffer reward mean=0.9990982296244607
+[2026-05-02 04:40:40,320][root][INFO] - GRPO reward baseline: baseline_reward_mean=0.8916916393773278, baseline_reward_std=0.13362018328144004, train_reward_mean=1.0, train_reward_std=0.0, n_all_success=64, n_train=16
+[2026-05-02 04:40:40,321][root][INFO] - Advantage stats [train]: adv_train_mean=0.8020, adv_train_std=0.0290, adv_train_min=0.6817, adv_train_max=0.8106, adv_train_pos_frac=1.0000
+[2026-05-02 04:40:40,321][root][INFO] - FINETUNE:
+[2026-05-02 04:41:16,592][root][INFO] - Epoch 0: loss: 0.1730, loss_diff: 0.1578, loss_kl: 0.6059

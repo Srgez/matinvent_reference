@@ -107,10 +107,23 @@ class MatterGenSuite(ModelSuite):
         rewards: NDArray | None,
         batch_size: int | None = None,
         shuffle: bool = True,
+        extra_properties: dict | None = None,
     ):
+        """Build a DataLoader from samples and rewards.
+
+        Args:
+            samples:          list of ChemGraph objects.
+            rewards:          per-sample reward array, shape (N,).
+            batch_size:       batch size; defaults to finetune_cfg.batch_size.
+            shuffle:          whether to shuffle the dataset.
+            extra_properties: optional dict of additional per-sample arrays
+                              (e.g. ``{'advantage': adv_arr}``).
+        """
         if batch_size is None:
             batch_size = self.finetune_cfg.batch_size
-        dataset = MatterGenDataset.from_samples(samples, rewards)
+        dataset = MatterGenDataset.from_samples(
+            samples, rewards, extra_properties=extra_properties,
+        )
         dataloader = DataLoader(
             dataset,
             shuffle=shuffle,

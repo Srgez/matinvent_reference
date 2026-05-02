@@ -1,0 +1,84 @@
+pipeline:
+  _target_: pipeline.mat_invent.MatInvent
+  rl_epoch: ${rl_epoch}
+  device: ${device}
+  save_dir: ./
+  save_freq: 10
+  sample_cfg: ${sample_cfg}
+  topk_ratio: 0.5
+  replay: true
+  replay_args:
+    buffer_size: 300
+    sample_size: 16
+    reward_cutoff: 0.65
+  div_filter: true
+  df_args:
+    tol: 3
+    buff: 6
+  finetune_cfg:
+    batch_size: 32
+    accum_steps: 50
+    epochs: 3
+    sigma: 0.025
+  grpo:
+    mode: lite
+    adv_eps: 1.0e-08
+    adv_clip: 3.0
+    kl_weight_mode: fixed
+    clip_eps: 0.2
+    strict_logprob: false
+    branch_steps:
+    - 300
+    - 500
+    - 800
+    branch_factors:
+    - 4
+    - 4
+    - 2
+model:
+  _target_: models.suite.MatterGenSuite
+  model_name: my_train_mattergen_base
+  device: ${device}
+  sample_cfg:
+    batch_size: 32
+    num_batches: 3
+    sampling_config_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/sampling_conf
+  finetune_cfg:
+    batch_size: 32
+    timesteps: 300
+    lr: 5.0e-06
+  model_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
+reward:
+  _target_: rewards.reward.Reward
+  root_dir: rewards
+  mattersim_potential_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/mattersim/mattersim-v1.0.0-1M.pth
+  mattersim_reference_dataset_path: /mnt/shared-storage-user/zhangsizhe/mattergen/data-release/alex-mp/reference_MP2020correction.gz
+  prop_cfg:
+  - name: ehull
+    calculator:
+      _target_: rewards.calculators.MatterSim
+      root_dir: rewards/ehull
+      task: ehull
+      device: ${device}
+      potential_load_path: ${reward.mattersim_potential_path}
+      reference_dataset_path: ${reward.mattersim_reference_dataset_path}
+      silent: true
+    target: descending
+    minv: 0.0
+    maxv: 0.5
+  reward_threshold: 0.8
+logger:
+  _target_: pipeline.utils.logger.WandBLogger
+  name: ${expname}
+  project: MatInvent
+  entity: null
+  group: null
+  mode: offline
+expname: grpo_lite_ehull_v1_my
+results_dir: exp_res
+device: cuda
+rl_epoch: 120
+sample_cfg:
+  num_batches: 3
+  max_num: 64
+eval_size: 64

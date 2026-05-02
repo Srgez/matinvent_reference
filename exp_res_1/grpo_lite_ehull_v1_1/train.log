@@ -1,0 +1,27 @@
+===================================================
+GRPO-lite full training — ehull reward
+===================================================
+  EXP_NAME          = grpo_lite_ehull_v1_1
+  OUT_DIR           = /mnt/shared-storage-user/zhangsizhe/matinvent_reference/exp_res_1/grpo_lite_ehull_v1_1
+  RL_EPOCH          = 120
+  EVAL_SIZE         = 64
+  SAMPLE_BATCH_SIZE = 32 x 3 batches
+  FT_BATCH_SIZE     = 32  (topk=0.5)
+  FT_TIMESTEPS      = 300
+  FT_EPOCHS         = 3
+  LR                = 5e-6
+  SIGMA (KL)        = 0.025
+  GRPO mode         = lite
+  GRPO adv_clip     = 3.0
+  REPLAY            = True (buf=300, sample=16, cutoff=0.65)
+  DIV_FILTER        = True (tol=3, buff=6)
+===================================================
+/mnt/shared-storage-user/zhangsizhe/matinvent_reference/.venv/lib/python3.10/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'base': Defaults list is missing `_self_`. See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+Could not override 'sample_cfg.filter.reference_path'.
+To append to your config use +sample_cfg.filter.reference_path=/mnt/shared-storage-user/zhangsizhe/mattergen/data-release/alex-mp/reference_MP2020correction.gz
+Key 'reference_path' is not in struct
+    full_key: sample_cfg.filter.reference_path
+    object_type=dict
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

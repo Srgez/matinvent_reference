@@ -1,0 +1,196 @@
+hydra:
+  run:
+    dir: ${results_dir}/${expname}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+    params: null
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+    hydra_help: ???
+  hydra_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][HYDRA] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    loggers:
+      logging_example:
+        level: DEBUG
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+      file:
+        class: logging.FileHandler
+        formatter: simple
+        filename: ${hydra.runtime.output_dir}/${hydra.job.name}.log
+    root:
+      level: INFO
+      handlers:
+      - console
+      - file
+    disable_existing_loggers: false
+  env: {}
+  mode: RUN
+  searchpath: []
+  callbacks: {}
+  output_subdir: .hydra
+  overrides:
+    hydra:
+    - hydra.mode=RUN
+    task:
+    - expname=grpo_lite_ehull_v1_my
+    - results_dir=exp_res
+    - pipeline=mat_invent
+    - model=mattergen
+    - model.model_name=my_train_mattergen_base
+    - +model.model_path=/mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
+    - reward=ehull
+    - reward.mattersim_potential_path=/mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/mattersim/mattersim-v1.0.0-1M.pth
+    - reward.mattersim_reference_dataset_path=/mnt/shared-storage-user/zhangsizhe/mattergen/data-release/alex-mp/reference_MP2020correction.gz
+    - logger=wandb
+    - rl_epoch=120
+    - eval_size=64
+    - model.sample_cfg.sampling_config_path=/mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/sampling_conf
+    - model.sample_cfg.batch_size=32
+    - model.sample_cfg.num_batches=3
+    - model.finetune_cfg.batch_size=32
+    - model.finetune_cfg.timesteps=300
+    - model.finetune_cfg.lr=5e-6
+    - sample_cfg.num_batches=3
+    - sample_cfg.max_num=64
+    - ~sample_cfg.filter
+    - pipeline.topk_ratio=0.5
+    - pipeline.save_freq=10
+    - pipeline.finetune_cfg.batch_size=32
+    - pipeline.finetune_cfg.accum_steps=50
+    - pipeline.finetune_cfg.epochs=3
+    - pipeline.finetune_cfg.sigma=0.025
+    - pipeline.replay=True
+    - pipeline.replay_args.buffer_size=300
+    - pipeline.replay_args.sample_size=16
+    - pipeline.replay_args.reward_cutoff=0.65
+    - pipeline.div_filter=True
+    - pipeline.df_args.tol=3
+    - pipeline.df_args.buff=6
+    - pipeline.grpo.mode=lite
+    - pipeline.grpo.adv_eps=1e-8
+    - pipeline.grpo.adv_clip=3.0
+    - pipeline.grpo.kl_weight_mode=fixed
+  job:
+    name: main
+    chdir: null
+    override_dirname: +model.model_path=/mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base,eval_size=64,expname=grpo_lite_ehull_v1_my,logger=wandb,model.finetune_cfg.batch_size=32,model.finetune_cfg.lr=5e-6,model.finetune_cfg.timesteps=300,model.model_name=my_train_mattergen_base,model.sample_cfg.batch_size=32,model.sample_cfg.num_batches=3,model.sample_cfg.sampling_config_path=/mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/sampling_conf,model=mattergen,pipeline.df_args.buff=6,pipeline.df_args.tol=3,pipeline.div_filter=True,pipeline.finetune_cfg.accum_steps=50,pipeline.finetune_cfg.batch_size=32,pipeline.finetune_cfg.epochs=3,pipeline.finetune_cfg.sigma=0.025,pipeline.grpo.adv_clip=3.0,pipeline.grpo.adv_eps=1e-8,pipeline.grpo.kl_weight_mode=fixed,pipeline.grpo.mode=lite,pipeline.replay=True,pipeline.replay_args.buffer_size=300,pipeline.replay_args.reward_cutoff=0.65,pipeline.replay_args.sample_size=16,pipeline.save_freq=10,pipeline.topk_ratio=0.5,pipeline=mat_invent,results_dir=exp_res,reward.mattersim_potential_path=/mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/mattersim/mattersim-v1.0.0-1M.pth,reward.mattersim_reference_dataset_path=/mnt/shared-storage-user/zhangsizhe/mattergen/data-release/alex-mp/reference_MP2020correction.gz,reward=ehull,rl_epoch=120,sample_cfg.max_num=64,sample_cfg.num_batches=3,~sample_cfg.filter
+    id: ???
+    num: ???
+    config_name: base
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.3.1
+    version_base: '1.1'
+    cwd: /mnt/shared-storage-user/zhangsizhe/matinvent_reference
+    config_sources:
+    - path: hydra.conf
+      schema: pkg
+      provider: hydra
+    - path: /mnt/shared-storage-user/zhangsizhe/matinvent_reference/configs
+      schema: file
+      provider: main
+    - path: ''
+      schema: structured
+      provider: schema
+    output_dir: /mnt/shared-storage-user/zhangsizhe/matinvent_reference/exp_res/grpo_lite_ehull_v1_my
+    choices:
+      logger: wandb
+      reward: ehull
+      model: mattergen
+      pipeline: mat_invent
+      hydra/env: default
+      hydra/callbacks: null
+      hydra/job_logging: default
+      hydra/hydra_logging: default
+      hydra/hydra_help: default
+      hydra/help: default
+      hydra/sweeper: basic
+      hydra/launcher: basic
+      hydra/output: default
+  verbose: false

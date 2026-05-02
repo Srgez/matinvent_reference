@@ -43,12 +43,29 @@ class MatterGenDataset(CrystalDataset):
         cls,
         samples: ChemGraph | list[ChemGraph],
         rewards: NDArray | None = None,
+        extra_properties: dict[str, NDArray] | None = None,
         transforms: list[Transform] | None = TF_LIST,
     ):
+        """Build a MatterGenDataset from a list of ChemGraph samples.
+
+        Args:
+            samples:          ChemGraph or list of ChemGraphs.
+            rewards:          per-sample reward values, shape (N,). Stored as
+                              ``batch.reward`` after collation.
+            extra_properties: optional dict of additional per-sample arrays
+                              (e.g. ``{'advantage': adv_arr}``).  Each value
+                              must have shape (N,) and will be accessible on
+                              the collated batch as ``batch.<key>``.
+            transforms:       list of dataset transforms to apply.
+        """
         if rewards is None:
             properties = {}
         else:
             properties = {'reward': rewards}
+
+        if extra_properties is not None:
+            properties.update(extra_properties)
+
         if isinstance(samples, list):
             samples = collate(samples)
 

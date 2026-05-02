@@ -3,4 +3,4 @@ name: ${expname}
 project: MatInvent
 entity: null
 group: null
-mode: 'online'
+mode: 'offline'   # use 'online' when network is available; sync later with: wandb sync <run_dir>
