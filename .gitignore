@@ -1,6 +1,8 @@
 wandb
 figures
 exp_res
+exp_res_1
+exp_res_all
 *.traj
 *.zip
 *.ipynb

@@ -262,6 +262,40 @@ class MatInvent(ReinL):
         )
         return advantages
 
+    def _load_best_reward_mean(self) -> float:
+        """Read the existing best reward metric when resuming, if present."""
+        meta_path = os.path.join(self.models_dir, 'best_reward', 'checkpoint_meta.yaml')
+        if not os.path.exists(meta_path):
+            return -float('inf')
+        try:
+            meta = OmegaConf.load(meta_path)
+            return float(meta.get('reward_mean', -float('inf')))
+        except Exception as exc:
+            logging.warning(f'Could not read best checkpoint metadata at {meta_path}: {exc}')
+            return -float('inf')
+
+    def _save_tracked_checkpoint(
+        self,
+        ckpt_dir: str,
+        kind: str,
+        step: int,
+        metrics: Optional[Dict] = None,
+    ):
+        """Save a checkpoint plus lightweight metadata for tracking."""
+        self.model_suite.save_model(self.agent, ckpt_dir)
+        meta = {
+            'kind': kind,
+            'step': int(step),
+        }
+        for key, value in (metrics or {}).items():
+            if value is None:
+                continue
+            try:
+                meta[key] = float(value)
+            except (TypeError, ValueError):
+                meta[key] = value
+        OmegaConf.save(OmegaConf.create(meta), os.path.join(ckpt_dir, 'checkpoint_meta.yaml'))
+
     def rl_step(self):
         logging.info(f'*****   LOOP {self.step} START   *****')
         start_time = time.time()
@@ -367,14 +401,34 @@ class MatInvent(ReinL):
         total_time = (end_time - start_time) / 60
         logging.info(f'*****   LOOP {self.step} FINISH   *****')
         logging.info(f'Total time taken: {total_time:.2f} min.\n\n')
+        return {
+            'reward_mean': float(grpo_baseline_rewards.mean()),
+            'reward_std': float(grpo_baseline_rewards.std()),
+        }
 
     def run_rl(self):
         logging.info('*****   RL START   *****')
         start_time = time.time()
+        best_reward_mean = self._load_best_reward_mean()
+        if best_reward_mean > -float('inf'):
+            logging.info(f'Loaded existing best reward mean: {best_reward_mean:.6f}')
 
         for step in range(self.start_loop, self.rl_epoch):
             self.step = step
-            self.rl_step()
+            step_metrics = self.rl_step() or {}
+
+            last_dir = os.path.join(self.models_dir, 'last')
+            self._save_tracked_checkpoint(last_dir, 'last', step, step_metrics)
+
+            reward_mean = step_metrics.get('reward_mean')
+            if reward_mean is not None and float(reward_mean) > best_reward_mean:
+                best_reward_mean = float(reward_mean)
+                best_dir = os.path.join(self.models_dir, 'best_reward')
+                self._save_tracked_checkpoint(best_dir, 'best_reward', step, step_metrics)
+                logging.info(
+                    f'New best_reward checkpoint at loop {step}: '
+                    f'reward_mean={best_reward_mean:.6f}'
+                )
             # Save the agent weights every few iterations
             if (step + 1) % self.save_freq == 0:
                 ckpt_dir = os.path.join(self.models_dir, f'loop_{step:0>4d}')

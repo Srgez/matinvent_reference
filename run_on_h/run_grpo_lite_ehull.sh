@@ -43,10 +43,10 @@ set -euo pipefail
 # Job configuration
 # ──────────────────────────────────────────────────────────────
 JOB_NAME="${JOB_NAME:-matinvent-lite-ehull2}"
-GPU_NUM="${GPU_NUM:-4}"
+GPU_NUM="${GPU_NUM:-1}"
 MEMORY="${MEMORY:-400000}"
 CPU_NUM="${CPU_NUM:-32}"
-GROUP_NAME="${GROUP_NAME:-hpjllm_gpu}"
+GROUP_NAME="${GROUP_NAME:-ai4sdata_gpu}"
 MOUNT_PATH="${MOUNT_PATH:-gpfs://gpfs1/zhangsizhe:/mnt/shared-storage-user/zhangsizhe}"
 IMAGE_NAME="${IMAGE_NAME:-registry.h.pjlab.org.cn/ailab-ai4sdata/zhangsizhe-workspace:20251221230837}"
 
@@ -67,7 +67,7 @@ SAMPLING_CONFIG_PATH="${SAMPLING_CONFIG_PATH:-/mnt/shared-storage-user/zhangsizh
 # Experiment identity
 # ──────────────────────────────────────────────────────────────
 EXP_NAME="${EXP_NAME:-grpo_lite_ehull_v1_my}"
-RESULTS_DIR="${RESULTS_DIR:-exp_res}"
+RESULTS_DIR="${RESULTS_DIR:-exp_res_all}"
 LOGGER_NAME="${LOGGER_NAME:-wandb}"        # offline wandb; sync later with: wandb sync <wandb_dir>
 MATTERGEN_MODEL_NAME="${MATTERGEN_MODEL_NAME:-my_train_mattergen_base}"
 
@@ -219,6 +219,7 @@ python -u main.py \
   model.finetune_cfg.lr=${LR} \
   \
   sample_cfg.num_batches=${SAMPLE_NUM_BATCHES} \
+  sample_cfg.batch_size=${SAMPLE_BATCH_SIZE} \
   sample_cfg.max_num=${EVAL_SIZE} \
   ~sample_cfg.filter \
   \
