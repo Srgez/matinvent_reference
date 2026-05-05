@@ -1,0 +1,84 @@
+# @package _global_
+expname: matinvent_baseline_ehull_sliding_0_100_step_50_loops_5
+results_dir: exp_res_all
+
+model:
+  model_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
+  finetune_cfg:
+    timestep_schedule:
+      - loop_start: 0
+        loop_end: 5
+        timestep_start: 0
+        timestep_end: 100
+      - loop_start: 5
+        loop_end: 10
+        timestep_start: 50
+        timestep_end: 150
+      - loop_start: 10
+        loop_end: 15
+        timestep_start: 100
+        timestep_end: 200
+      - loop_start: 15
+        loop_end: 20
+        timestep_start: 150
+        timestep_end: 250
+      - loop_start: 20
+        loop_end: 25
+        timestep_start: 200
+        timestep_end: 300
+      - loop_start: 25
+        loop_end: 30
+        timestep_start: 250
+        timestep_end: 350
+      - loop_start: 30
+        loop_end: 35
+        timestep_start: 300
+        timestep_end: 400
+      - loop_start: 35
+        loop_end: 40
+        timestep_start: 350
+        timestep_end: 450
+      - loop_start: 40
+        loop_end: 45
+        timestep_start: 400
+        timestep_end: 500
+      - loop_start: 45
+        loop_end: 50
+        timestep_start: 450
+        timestep_end: 550
+      - loop_start: 50
+        loop_end: 55
+        timestep_start: 500
+        timestep_end: 600
+      - loop_start: 55
+        loop_end: 60
+        timestep_start: 550
+        timestep_end: 650
+      - loop_start: 60
+        loop_end: 65
+        timestep_start: 600
+        timestep_end: 700
+      - loop_start: 65
+        loop_end: 70
+        timestep_start: 650
+        timestep_end: 750
+      - loop_start: 70
+        loop_end: 75
+        timestep_start: 700
+        timestep_end: 800
+      - loop_start: 75
+        loop_end: 80
+        timestep_start: 750
+        timestep_end: 850
+      - loop_start: 80
+        loop_end: 85
+        timestep_start: 800
+        timestep_end: 900
+      - loop_start: 85
+        loop_end: 90
+        timestep_start: 850
+        timestep_end: 950
+      - loop_start: 90
+        loop_end: 95
+        timestep_start: 900
+        timestep_end: 1000

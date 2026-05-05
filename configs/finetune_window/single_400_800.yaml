@@ -1,0 +1,11 @@
+# @package _global_
+expname: matinvent_baseline_ehull_single_400_800
+results_dir: exp_res_all
+model:
+  model_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
+  finetune_cfg:
+    timestep_schedule:
+      - loop_start: 0
+        loop_end: 1
+        timestep_start: 400
+        timestep_end: 800

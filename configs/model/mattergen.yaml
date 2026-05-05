@@ -1,6 +1,7 @@
 _target_: models.suite.MatterGenSuite
 
 model_name: mattergen_base
+model_path: null
 device: ${device}
 
 sample_cfg:
@@ -11,4 +12,7 @@ sample_cfg:
 finetune_cfg:
   batch_size: ${eval_size}
   timesteps: 1000
+  timestep_start: 0
+  timestep_end: null
+  timestep_schedule: null
   lr: 1.0e-05

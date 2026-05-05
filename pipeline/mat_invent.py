@@ -10,6 +10,10 @@ from pipeline.base import ReinL
 from pipeline.filters import invalid_filter
 from pipeline.utils.save import save_structures
 from pipeline.utils.logger import Logger
+from pipeline.timestep_window import (
+    resolve_finetune_schedule_segment,
+    resolve_finetune_timestep_window,
+)
 from pipeline.grpo_utils import (
     compute_advantage,
     log_advantage_stats,
@@ -177,6 +181,29 @@ class MatInvent(ReinL):
 
         optimizer = torch.optim.Adam(self.agent.parameters(), lr=cfg.lr)
         accum_steps = cfg.accum_steps
+        schedule_segment = resolve_finetune_schedule_segment(cfg, loop_idx=self.step)
+        timestep_values = resolve_finetune_timestep_window(cfg, loop_idx=self.step)
+        timestep_count = len(timestep_values)
+        if schedule_segment is not None:
+            logging.info(
+                'Finetune timestep window: '
+                f'rl_loop={self.step}, '
+                f'ft_timestep_start={timestep_values[0]}, '
+                f'ft_timestep_end={timestep_values[-1] + 1}, '
+                f'ft_timestep_count={timestep_count}, '
+                f'ft_schedule_segment_start={schedule_segment["loop_start"]}, '
+                f'ft_schedule_segment_end={schedule_segment["loop_end"]}'
+            )
+        else:
+            logging.info(
+                'Finetune timestep window: '
+                f'rl_loop={self.step}, '
+                f'ft_timestep_start={timestep_values[0]}, '
+                f'ft_timestep_end={timestep_values[-1] + 1}, '
+                f'ft_timestep_count={timestep_count}, '
+                'ft_schedule_segment_start=None, '
+                'ft_schedule_segment_end=None'
+            )
 
         for epoch in range(cfg.epochs):
             self.agent.train()
@@ -187,7 +214,7 @@ class MatInvent(ReinL):
                 optimizer.zero_grad()
                 loss, loss_diff, loss_kl = 0., 0., 0.
 
-                for t in range(cfg.timesteps):
+                for t in timestep_values:
                     noised_input = self.agent.add_noise(batch, t)
                     sample_loss, agent_pred = self.agent.calc_sample_loss(noised_input)
                     _, prior_pred = self.prior.calc_sample_loss(noised_input)
@@ -220,12 +247,13 @@ class MatInvent(ReinL):
                     loss_diff += _loss_diff.sum().item()
                     loss_kl += _loss_kl.sum().item()
 
-                loss_diff = loss_diff / cfg.timesteps
-                loss_kl = loss_kl / cfg.timesteps
-                loss = loss / cfg.timesteps
+                loss_diff = loss_diff / timestep_count
+                loss_kl = loss_kl / timestep_count
+                loss = loss / timestep_count
 
                 if (t + 1) % accum_steps != 0:
                     optimizer.step()
+                    optimizer.zero_grad()
 
                 loss_all += loss * batch.num_graphs
                 loss_diff_all += loss_diff
@@ -238,6 +266,7 @@ class MatInvent(ReinL):
             }
             log_str = [f'{k}: {v:.4f}' for k, v in loss_dict.items()]
             logging.info(f'Epoch {epoch}: ' + ', '.join(log_str))
+
 
     def _compute_grpo_advantages(
         self,
@@ -299,7 +328,6 @@ class MatInvent(ReinL):
     def rl_step(self):
         logging.info(f'*****   LOOP {self.step} START   *****')
         start_time = time.time()
-
         logging.info('SAMPLE:')
         sample_list, sample_struc, xyz_path, sample_metrics = self.sample_step()
 
@@ -309,9 +337,7 @@ class MatInvent(ReinL):
             sample_list, sample_struc, xyz_path, f'step_{self.step:0>4d}',
         )
 
-        # ── GRPO: save all-success rewards as baseline BEFORE diversity filter ──
-        # Diversity filter may penalise reward values; the GRPO baseline should
-        # reflect the true reward distribution of this rollout.
+        # GRPO baseline should reflect the true reward distribution of this rollout.
         grpo_baseline_rewards = rewards.copy()
 
         log_dict = {f'{k} mean': v.mean() for k, v in prop_dict.items()}
@@ -319,7 +345,6 @@ class MatInvent(ReinL):
         log_dict.update({'reward mean': rewards.mean(), 'reward std': rewards.std()})
         log_dict.update(sample_metrics)
 
-        # long-term memory
         self.ltm.extend(sample_struc, rewards, self.step)
         metrics = self.ltm.calc_metrics(self.reward.threshold)
         self.ltm.save(os.path.join(self.sample_dir, 'long_term_memory.csv'))
@@ -340,7 +365,6 @@ class MatInvent(ReinL):
         if self.logger is not None:
             self.logger.log(log_dict, step=self.step)
 
-        # diversity filter (may modify reward values for penalty)
         penalty_strucs = []
         if self.div_filter:
             rewards, penalty_idx, tol_n, buff_n = self.ltm.div_filter(
@@ -349,14 +373,13 @@ class MatInvent(ReinL):
             penalty_strucs = [sample_struc[p] for p in penalty_idx]
             logging.info(f'Diversity filter: tol_n={tol_n}, buff_n={buff_n}')
 
-        # topk data points
         sort_idx = np.argsort(rewards)[::-1]
         topk_idx = sort_idx[: int(self.finetune_cfg.batch_size * self.topk_ratio)]
         sample_topk = [sample_list[_i] for _i in topk_idx]
         strucs_topk = [sample_struc[_i] for _i in topk_idx]
         reward_topk = rewards[topk_idx]
 
-        # experience replay
+        reward_replay = np.array([])
         if self.replay is not None:
             if self.div_filter and len(penalty_strucs) > 0:
                 self.replay.memory_purge(penalty_strucs)
@@ -370,17 +393,10 @@ class MatInvent(ReinL):
             ft_data = sample_topk
             ft_reward = reward_topk
 
-        # ── GRPO advantage computation ────────────────────────────────────────
-        # For top-k train samples: advantage normalised against ALL success rewards.
-        # For replay samples (if any): use the same current-step baseline so the
-        # scale is consistent (these are off-policy but at least comparably scaled).
         ft_advantage = None
         if self.grpo_cfg.mode != 'none':
-            # top-k advantages against current rollout baseline
             adv_topk = self._compute_grpo_advantages(grpo_baseline_rewards, reward_topk)
-
             if self.replay is not None and len(reward_replay) > 0:
-                # replay samples normalised with same baseline
                 adv_replay = self._compute_grpo_advantages(grpo_baseline_rewards, reward_replay)
                 ft_advantage = np.concatenate((adv_topk, adv_replay))
             else:
@@ -391,11 +407,8 @@ class MatInvent(ReinL):
             if self.logger is not None:
                 self.logger.log({**baseline_stats, **adv_stats}, step=self.step)
 
-        # finetuning
         logging.info('FINETUNE:')
-        baseline = self.ltm.get_baseline(self.step)
-        baseline = min(baseline, ft_reward.min())
-        self.ft_step(ft_data, ft_reward, advantages=ft_advantage, baseline=baseline)
+        self.ft_step(ft_data, ft_reward, advantages=ft_advantage, baseline=None)
 
         end_time = time.time()
         total_time = (end_time - start_time) / 60
@@ -429,7 +442,6 @@ class MatInvent(ReinL):
                     f'New best_reward checkpoint at loop {step}: '
                     f'reward_mean={best_reward_mean:.6f}'
                 )
-            # Save the agent weights every few iterations
             if (step + 1) % self.save_freq == 0:
                 ckpt_dir = os.path.join(self.models_dir, f'loop_{step:0>4d}')
                 self.model_suite.save_model(self.agent, ckpt_dir)

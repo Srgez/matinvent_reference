@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
 import torch
+from omegaconf import OmegaConf
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -92,6 +93,137 @@ def test_log_functions_run():
     )
     assert "baseline_reward_mean" in baseline_stats
     print(f"[PASS] test_log_functions_run")
+
+
+def test_resolve_finetune_timestep_window_default():
+    """Default window should match the current 0..timesteps-1 behavior."""
+    from pipeline.timestep_window import resolve_finetune_timestep_window
+
+    cfg = OmegaConf.create({
+        "timesteps": 300,
+        "timestep_start": 0,
+        "timestep_end": None,
+    })
+    window = resolve_finetune_timestep_window(cfg)
+
+    assert len(window) == 300
+    assert window[0] == 0
+    assert window[-1] == 299
+    print(f"[PASS] test_resolve_finetune_timestep_window_default")
+
+
+def test_resolve_finetune_timestep_window_middle_range():
+    """Explicit middle window should train the requested global step range."""
+    from pipeline.timestep_window import resolve_finetune_timestep_window
+
+    cfg = OmegaConf.create({
+        "timesteps": 300,
+        "timestep_start": 300,
+        "timestep_end": 700,
+    })
+    window = resolve_finetune_timestep_window(cfg)
+
+    assert len(window) == 400
+    assert window[0] == 300
+    assert window[-1] == 699
+    print(f"[PASS] test_resolve_finetune_timestep_window_middle_range")
+
+
+def test_resolve_finetune_timestep_window_invalid_ranges():
+    """Invalid timestep windows should raise clear errors."""
+    from pipeline.timestep_window import resolve_finetune_timestep_window
+
+    bad_cfgs = [
+        {"timesteps": 300, "timestep_start": -1, "timestep_end": None},
+        {"timesteps": 300, "timestep_start": 700, "timestep_end": 700},
+        {"timesteps": 300, "timestep_start": 700, "timestep_end": 1001},
+    ]
+
+    for bad_cfg in bad_cfgs:
+        cfg = OmegaConf.create(bad_cfg)
+        try:
+            resolve_finetune_timestep_window(cfg)
+        except ValueError:
+            continue
+        raise AssertionError(f"Expected ValueError for config {bad_cfg}")
+
+    print(f"[PASS] test_resolve_finetune_timestep_window_invalid_ranges")
+
+
+def test_resolve_finetune_timestep_window_schedule_segments():
+    """Schedule mode should switch windows by RL loop and reuse the last segment."""
+    from pipeline.timestep_window import (
+        resolve_finetune_schedule_segment,
+        resolve_finetune_timestep_window,
+    )
+
+    cfg = OmegaConf.create({
+        "timesteps": 300,
+        "timestep_start": 0,
+        "timestep_end": None,
+        "timestep_schedule": [
+            {"loop_start": 0, "loop_end": 30, "timestep_start": 0, "timestep_end": 300},
+            {"loop_start": 30, "loop_end": 60, "timestep_start": 300, "timestep_end": 700},
+        ],
+    })
+
+    seg0 = resolve_finetune_schedule_segment(cfg, loop_idx=0)
+    seg29 = resolve_finetune_schedule_segment(cfg, loop_idx=29)
+    seg30 = resolve_finetune_schedule_segment(cfg, loop_idx=30)
+    seg59 = resolve_finetune_schedule_segment(cfg, loop_idx=59)
+    seg60 = resolve_finetune_schedule_segment(cfg, loop_idx=60)
+
+    assert seg0["timestep_start"] == 0 and seg0["timestep_end"] == 300
+    assert seg29["timestep_start"] == 0 and seg29["timestep_end"] == 300
+    assert seg30["timestep_start"] == 300 and seg30["timestep_end"] == 700
+    assert seg59["timestep_start"] == 300 and seg59["timestep_end"] == 700
+    assert seg60["timestep_start"] == 300 and seg60["timestep_end"] == 700
+
+    win0 = resolve_finetune_timestep_window(cfg, loop_idx=0)
+    win30 = resolve_finetune_timestep_window(cfg, loop_idx=30)
+    win60 = resolve_finetune_timestep_window(cfg, loop_idx=60)
+
+    assert win0[0] == 0 and win0[-1] == 299
+    assert win30[0] == 300 and win30[-1] == 699
+    assert win60[0] == 300 and win60[-1] == 699
+    print(f"[PASS] test_resolve_finetune_timestep_window_schedule_segments")
+
+
+def test_resolve_finetune_timestep_window_schedule_invalid_ranges():
+    """Invalid schedule segments should raise clear errors."""
+    from pipeline.timestep_window import resolve_finetune_schedule_segment
+
+    bad_cfgs = [
+        {
+            "timesteps": 300,
+            "timestep_schedule": [
+                {"loop_start": 0, "loop_end": 30, "timestep_start": 0, "timestep_end": 300},
+                {"loop_start": 20, "loop_end": 40, "timestep_start": 300, "timestep_end": 700},
+            ],
+        },
+        {
+            "timesteps": 300,
+            "timestep_schedule": [
+                {"loop_start": 0, "loop_end": 30, "timestep_start": 700, "timestep_end": 1001},
+            ],
+        },
+        {
+            "timesteps": 300,
+            "timestep_schedule": [
+                {"loop_start": 10, "loop_end": 30, "timestep_start": 0, "timestep_end": 300},
+            ],
+        },
+    ]
+
+    for bad_cfg in bad_cfgs:
+        cfg = OmegaConf.create(bad_cfg)
+        try:
+            resolve_finetune_schedule_segment(cfg, loop_idx=0)
+        except ValueError:
+            continue
+        raise AssertionError(f"Expected ValueError for schedule config {bad_cfg}")
+
+    print(f"[PASS] test_resolve_finetune_timestep_window_schedule_invalid_ranges")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -227,6 +359,11 @@ if __name__ == "__main__":
         test_compute_advantage_clip,
         test_compute_advantage_small_group,
         test_log_functions_run,
+        test_resolve_finetune_timestep_window_default,
+        test_resolve_finetune_timestep_window_middle_range,
+        test_resolve_finetune_timestep_window_invalid_ranges,
+        test_resolve_finetune_timestep_window_schedule_segments,
+        test_resolve_finetune_timestep_window_schedule_invalid_ranges,
         test_branch_rollout_tree_propagation,
         test_branch_rollout_tree_advantages,
         test_flat_rollout_buffer,

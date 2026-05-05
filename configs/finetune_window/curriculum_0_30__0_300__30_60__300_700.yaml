@@ -1,0 +1,15 @@
+# @package _global_
+expname: matinvent_baseline_ehull_curriculum_0_30__0_300__30_60__300_700
+results_dir: exp_res_all
+model:
+  model_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
+  finetune_cfg:
+    timestep_schedule:
+      - loop_start: 0
+        loop_end: 30
+        timestep_start: 0
+        timestep_end: 300
+      - loop_start: 30
+        loop_end: 60
+        timestep_start: 300
+        timestep_end: 700

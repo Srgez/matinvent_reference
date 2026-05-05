@@ -1,0 +1,20 @@
+# @package _global_
+expname: matinvent_baseline_ehull_sliding_0_300_step_100_loops_10_2
+results_dir: exp_res_all
+
+model:
+  model_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
+  finetune_cfg:
+    timestep_schedule:
+      - loop_start: 0
+        loop_end: 10
+        timestep_start: 0
+        timestep_end: 300
+      - loop_start: 10
+        loop_end: 20
+        timestep_start: 200
+        timestep_end: 500
+      - loop_start: 20
+        loop_end: 30
+        timestep_start: 400
+        timestep_end: 700

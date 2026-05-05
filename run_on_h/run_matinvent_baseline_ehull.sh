@@ -34,7 +34,7 @@ set -euo pipefail
 # ----------------------------------------------------------------
 JOB_NAME="${JOB_NAME:-matinvent-baseline-ehull}"
 GPU_NUM="${GPU_NUM:-1}"
-MEMORY="${MEMORY:-400000}"
+MEMORY="${MEMORY:-200000}"
 CPU_NUM="${CPU_NUM:-32}"
 GROUP_NAME="${GROUP_NAME:-ai4sdata_gpu}"
 MOUNT_PATH="${MOUNT_PATH:-gpfs://gpfs1/zhangsizhe:/mnt/shared-storage-user/zhangsizhe}"
@@ -55,7 +55,7 @@ SAMPLING_CONFIG_PATH="${SAMPLING_CONFIG_PATH:-/mnt/shared-storage-user/zhangsizh
 # ----------------------------------------------------------------
 # Experiment identity
 # ----------------------------------------------------------------
-EXP_NAME="${EXP_NAME:-matinvent_baseline_ehull_v1_my}"
+EXP_NAME="${EXP_NAME:-matinvent_baseline_ehull_v1_400-800}"
 RESULTS_DIR="${RESULTS_DIR:-exp_res_all}"
 LOGGER_NAME="${LOGGER_NAME:-wandb}"
 MATTERGEN_MODEL_NAME="${MATTERGEN_MODEL_NAME:-my_train_mattergen_base}"
@@ -63,7 +63,7 @@ MATTERGEN_MODEL_NAME="${MATTERGEN_MODEL_NAME:-my_train_mattergen_base}"
 # ----------------------------------------------------------------
 # RL loop
 # ----------------------------------------------------------------
-RL_EPOCH="${RL_EPOCH:-120}"
+RL_EPOCH="${RL_EPOCH:-80}"
 
 # ----------------------------------------------------------------
 # Sampling: keep identical to GRPO-lite ehull script
@@ -77,6 +77,10 @@ SAMPLE_NUM_BATCHES="${SAMPLE_NUM_BATCHES:-3}"
 # ----------------------------------------------------------------
 FT_BATCH_SIZE="${FT_BATCH_SIZE:-32}"
 FT_TIMESTEPS="${FT_TIMESTEPS:-300}"
+FT_TIMESTEP_START="${FT_TIMESTEP_START:-400}"
+FT_TIMESTEP_END="${FT_TIMESTEP_END:-800}"
+# WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-curriculum_0_30__0_300__30_60__300_700}"
+WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-curriculum_0_40__300_700__40_60__0_300}"
 FT_EPOCHS="${FT_EPOCHS:-3}"
 ACCUM_STEPS="${ACCUM_STEPS:-50}"
 LR="${LR:-5e-6}"
@@ -128,8 +132,53 @@ rjob submit \
 set -euo pipefail
 printf '>>> Job started on: %s\n' \"\$(hostname)\"
 
+cd \"${WORK_DIR}\"
+source .venv/bin/activate
+export MPLCONFIGDIR=\"${WORK_DIR}/.mplconfig\"
+mkdir -p \"\${MPLCONFIGDIR}\"
+
+EFFECTIVE_EXP_NAME=\"${EXP_NAME}\"
+EFFECTIVE_RESULTS_DIR=\"${RESULTS_DIR}\"
+EFFECTIVE_MODEL_PATH=\"${MATTERGEN_MODEL_PATH}\"
+
+WINDOW_SCHEDULE_OVERRIDE=""
+if [[ -n \"${WINDOW_SCHEDULE_NAME}\" ]]; then
+  WINDOW_SCHEDULE_CONFIG_PATH=\"${WORK_DIR}/configs/finetune_window/${WINDOW_SCHEDULE_NAME}.yaml\"
+  if [[ ! -f \"\${WINDOW_SCHEDULE_CONFIG_PATH}\" ]]; then
+    echo \">>> Missing finetune_window config: \${WINDOW_SCHEDULE_CONFIG_PATH}\"
+    exit 1
+  fi
+
+  readarray -t WINDOW_META < <(python - <<'PY' \"\${WINDOW_SCHEDULE_CONFIG_PATH}\"
+import sys
+from omegaconf import OmegaConf
+
+cfg = OmegaConf.load(sys.argv[1])
+print(cfg.get('expname') or '')
+print(cfg.get('results_dir') or '')
+model = cfg.get('model')
+if model is None:
+    print('')
+else:
+    print(model.get('model_path') or '')
+PY
+  )
+
+  if [[ -n \"\${WINDOW_META[0]}\" ]]; then
+    EFFECTIVE_EXP_NAME=\"\${WINDOW_META[0]}\"
+  fi
+  if [[ -n \"\${WINDOW_META[1]}\" ]]; then
+    EFFECTIVE_RESULTS_DIR=\"\${WINDOW_META[1]}\"
+  fi
+  if [[ -n \"\${WINDOW_META[2]}\" ]]; then
+    EFFECTIVE_MODEL_PATH=\"\${WINDOW_META[2]}\"
+  fi
+
+  WINDOW_SCHEDULE_OVERRIDE=\"+finetune_window=${WINDOW_SCHEDULE_NAME}\"
+fi
+
 # Pre-create output directory so config, logs, and launch script are preserved.
-OUT_DIR=\"${WORK_DIR}/${RESULTS_DIR}/${EXP_NAME}\"
+OUT_DIR=\"${WORK_DIR}/\${EFFECTIVE_RESULTS_DIR}/\${EFFECTIVE_EXP_NAME}\"
 mkdir -p \"\${OUT_DIR}\"
 
 cp \"${WORK_DIR}/run_on_h/run_matinvent_baseline_ehull.sh\" \"\${OUT_DIR}/launch.sh\"
@@ -140,13 +189,16 @@ exec > >(tee -a \"\${LOG_FILE}\") 2>&1
 echo '==================================================='
 echo 'Baseline MatInvent training -- ehull reward'
 echo '==================================================='
-echo \"  EXP_NAME          = ${EXP_NAME}\"
+echo \"  EXP_NAME          = \${EFFECTIVE_EXP_NAME}\"
 echo \"  OUT_DIR           = \${OUT_DIR}\"
 echo \"  RL_EPOCH          = ${RL_EPOCH}\"
 echo \"  EVAL_SIZE         = ${EVAL_SIZE}\"
 echo \"  SAMPLE_BATCH_SIZE = ${SAMPLE_BATCH_SIZE} x ${SAMPLE_NUM_BATCHES} batches\"
 echo \"  FT_BATCH_SIZE     = ${FT_BATCH_SIZE}  (topk=${TOPK_RATIO})\"
 echo \"  FT_TIMESTEPS      = ${FT_TIMESTEPS}\"
+echo \"  FT_T_WINDOW       = [${FT_TIMESTEP_START}, ${FT_TIMESTEP_END})\"
+echo \"  WINDOW_SCHEDULE   = ${WINDOW_SCHEDULE_NAME:-<none>}\"
+echo \"  MODEL_PATH        = \${EFFECTIVE_MODEL_PATH}\"
 echo \"  FT_EPOCHS         = ${FT_EPOCHS}\"
 echo \"  LR                = ${LR}\"
 echo \"  SIGMA (KL)        = ${SIGMA}\"
@@ -155,11 +207,6 @@ echo \"  GRPO mode         = ${GRPO_MODE}\"
 echo \"  REPLAY            = ${REPLAY} (buf=${BUFFER_SIZE}, sample=${SAMPLE_SIZE}, cutoff=${REWARD_CUTOFF})\"
 echo \"  DIV_FILTER        = ${DIV_FILTER} (tol=${DF_TOL}, buff=${DF_BUFF})\"
 echo '==================================================='
-
-cd \"${WORK_DIR}\"
-source .venv/bin/activate
-export MPLCONFIGDIR=\"${WORK_DIR}/.mplconfig\"
-mkdir -p \"\${MPLCONFIGDIR}\"
 
 # Offline wandb for reproducible cluster runs.
 export WANDB_MODE=offline
@@ -179,12 +226,12 @@ mkdir -p \"\${MODELS_PROJECT_ROOT_RUNTIME}/common/gemnet\"
 ln -sf \"${GEMNET_SCALE_FILE}\" \"\${MODELS_PROJECT_ROOT_RUNTIME}/common/gemnet/gemnet-dT.json\"
 
 python -u main.py \
-  expname=${EXP_NAME} \
-  results_dir=${RESULTS_DIR} \
+  expname=\${EFFECTIVE_EXP_NAME} \
+  results_dir=\${EFFECTIVE_RESULTS_DIR} \
   pipeline=mat_invent \
   model=mattergen \
   model.model_name=${MATTERGEN_MODEL_NAME} \
-  +model.model_path=${MATTERGEN_MODEL_PATH} \
+  model.model_path=\${EFFECTIVE_MODEL_PATH} \
   reward=${REWARD_NAME} \
   reward.mattersim_potential_path=${MATTERSIM_POTENTIAL_PATH} \
   reward.mattersim_reference_dataset_path=${REFERENCE_DATASET_PATH} \
@@ -197,6 +244,8 @@ python -u main.py \
   model.sample_cfg.num_batches=${SAMPLE_NUM_BATCHES} \
   model.finetune_cfg.batch_size=${FT_BATCH_SIZE} \
   model.finetune_cfg.timesteps=${FT_TIMESTEPS} \
+  model.finetune_cfg.timestep_start=${FT_TIMESTEP_START} \
+  model.finetune_cfg.timestep_end=${FT_TIMESTEP_END} \
   model.finetune_cfg.lr=${LR} \
   \
   sample_cfg.num_batches=${SAMPLE_NUM_BATCHES} \
@@ -220,7 +269,8 @@ python -u main.py \
   pipeline.df_args.buff=${DF_BUFF} \
   \
   pipeline.grpo.mode=${GRPO_MODE} \
-  pipeline.grpo.kl_weight_mode=${GRPO_KL_WEIGHT_MODE}
+  pipeline.grpo.kl_weight_mode=${GRPO_KL_WEIGHT_MODE} \
+  \${WINDOW_SCHEDULE_OVERRIDE}
 
 echo '>>> Baseline MatInvent training finished successfully'
 echo \">>> Outputs saved to: \${OUT_DIR}\"
