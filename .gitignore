@@ -124,3 +124,4 @@ Local
 # Local datasets / references
 reference/
 *.ckpt
+*.ckpt
