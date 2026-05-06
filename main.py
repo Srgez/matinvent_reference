@@ -1,11 +1,24 @@
-import os
-import hydra
 import logging
+import os
+import random
+
+import hydra
+import numpy as np
+import torch
 from omegaconf import DictConfig, OmegaConf
 
 
 logger = logging.getLogger(__name__)
 OmegaConf.register_new_resolver("calc", eval, replace=True)
+
+
+def set_global_seed(seed: int) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
 
 
 def _add_file_logging(log_path: str) -> None:
@@ -39,6 +52,8 @@ def main(cfg: DictConfig) -> None:
 
     # Attach Python-level file logging (complements the tee in the shell script)
     _add_file_logging("train.log")
+    set_global_seed(int(cfg.seed))
+    logger.info(f"Global seed set to {int(cfg.seed)}")
 
     hydra.core.global_hydra.GlobalHydra.instance().clear()
     reinl = hydra.utils.instantiate(

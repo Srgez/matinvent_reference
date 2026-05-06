@@ -3,6 +3,8 @@ figures
 exp_res
 exp_res_1
 exp_res_all
+exp_res_seed
+exp_res_test
 *.traj
 *.zip
 *.ipynb

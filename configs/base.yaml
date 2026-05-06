@@ -2,6 +2,7 @@
 expname: test
 results_dir: exp_res
 device: cuda
+seed: 42
 
 # RL
 rl_epoch: 120

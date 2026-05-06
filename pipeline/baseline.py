@@ -63,6 +63,7 @@ class Baseline(ReinL):
 
     def rl_step(self):
         logging.info(f'*****   LOOP {self.step} START   *****')
+        start_time = time.time()
         # print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
         logging.info('SAMPLE:')
@@ -106,11 +107,18 @@ class Baseline(ReinL):
         if self.logger is not None:
             self.logger.log(log_dict, step=self.step)
 
-        logging.info(f'*****   LOOP {self.step} FINISH   *****\n\n')
+        end_time = time.time()
+        loop_time = (end_time - start_time) / 60
+        elapsed_total = (end_time - self.rl_start_time) / 60
+        logging.info(f'*****   LOOP {self.step} FINISH   *****')
+        logging.info(f'Loop time taken: {loop_time:.2f} min.')
+        logging.info(
+            f'Cumulative time to loop {self.step}: {elapsed_total:.2f} min.\n\n'
+        )
 
     def run_rl(self):
         logging.info('*****   RL START   *****')
-        start_time = time.time()
+        self.rl_start_time = time.time()
 
         for step in range(self.rl_epoch):
             self.step = step
@@ -118,4 +126,4 @@ class Baseline(ReinL):
 
         logging.info('*****   RL END   *****')
         end_time = time.time()
-        logging.info('Total time taken: {} s.'.format(int(end_time - start_time)))
+        logging.info('Total time taken: {} s.'.format(int(end_time - self.rl_start_time)))

@@ -33,7 +33,7 @@ set -euo pipefail
 # Job configuration
 # ----------------------------------------------------------------
 JOB_NAME="${JOB_NAME:-matinvent-baseline-ehull}"
-GPU_NUM="${GPU_NUM:-0}"
+GPU_NUM="${GPU_NUM:-1}"
 MEMORY="${MEMORY:-200000}"
 CPU_NUM="${CPU_NUM:-32}"
 GROUP_NAME="${GROUP_NAME:-hpjllm_gpu}"
@@ -81,7 +81,9 @@ FT_TIMESTEP_START="${FT_TIMESTEP_START:-400}"
 FT_TIMESTEP_END="${FT_TIMESTEP_END:-800}"
 # WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-curriculum_0_30__0_300__30_60__300_700}"
 # WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-curriculum_0_40__300_700__40_60__0_300}"
-WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-test}"
+# WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-300_700}"
+# WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-sliding_0_300_step_100_loops_10_2}"
+WINDOW_SCHEDULE_NAME="${WINDOW_SCHEDULE_NAME:-curriculum_0_30__0_300__30_60__300_700}"
 FT_EPOCHS="${FT_EPOCHS:-3}"
 ACCUM_STEPS="${ACCUM_STEPS:-50}"
 LR="${LR:-5e-6}"
@@ -119,7 +121,8 @@ REWARD_NAME="ehull"
 # ----------------------------------------------------------------
 # Submit
 # ----------------------------------------------------------------
-rlaunch \
+rjob submit\
+  --name="${JOB_NAME}" \
   --gpu="${GPU_NUM}" \
   --memory="${MEMORY}" \
   --cpu="${CPU_NUM}" \
@@ -181,7 +184,7 @@ fi
 OUT_DIR=\"${WORK_DIR}/\${EFFECTIVE_RESULTS_DIR}/\${EFFECTIVE_EXP_NAME}\"
 mkdir -p \"\${OUT_DIR}\"
 
-cp \"${WORK_DIR}/run_on_h/run_matinvent_baseline_ehull.sh\" \"\${OUT_DIR}/launch.sh\"
+cp \"${WORK_DIR}/run_on_h/run_matinvent_baseline_ehull_seed.sh\" \"\${OUT_DIR}/launch.sh\"
 
 LOG_FILE=\"\${OUT_DIR}/train.log\"
 exec > >(tee -a \"\${LOG_FILE}\") 2>&1

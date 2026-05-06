@@ -411,9 +411,13 @@ class MatInvent(ReinL):
         self.ft_step(ft_data, ft_reward, advantages=ft_advantage, baseline=None)
 
         end_time = time.time()
-        total_time = (end_time - start_time) / 60
+        loop_time = (end_time - start_time) / 60
+        elapsed_total = (end_time - self.rl_start_time) / 60
         logging.info(f'*****   LOOP {self.step} FINISH   *****')
-        logging.info(f'Total time taken: {total_time:.2f} min.\n\n')
+        logging.info(f'Loop time taken: {loop_time:.2f} min.')
+        logging.info(
+            f'Cumulative time to loop {self.step}: {elapsed_total:.2f} min.\n\n'
+        )
         return {
             'reward_mean': float(grpo_baseline_rewards.mean()),
             'reward_std': float(grpo_baseline_rewards.std()),
@@ -421,7 +425,7 @@ class MatInvent(ReinL):
 
     def run_rl(self):
         logging.info('*****   RL START   *****')
-        start_time = time.time()
+        self.rl_start_time = time.time()
         best_reward_mean = self._load_best_reward_mean()
         if best_reward_mean > -float('inf'):
             logging.info(f'Loaded existing best reward mean: {best_reward_mean:.6f}')
@@ -451,4 +455,4 @@ class MatInvent(ReinL):
 
         logging.info('*****   RL END   *****')
         end_time = time.time()
-        logging.info('Total time taken: {} s.'.format(int(end_time - start_time)))
+        logging.info('Total time taken: {} s.'.format(int(end_time - self.rl_start_time)))

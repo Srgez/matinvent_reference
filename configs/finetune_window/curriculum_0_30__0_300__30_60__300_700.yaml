@@ -1,6 +1,6 @@
 # @package _global_
-expname: matinvent_baseline_ehull_curriculum_0_30__0_300__30_60__300_700
-results_dir: exp_res_all
+expname: matinvent_baseline_ehull_curriculum_0_30__0_300__30_60__300_700_seed_news
+results_dir: exp_res_seed
 model:
   model_path: /mnt/shared-storage-user/zhangsizhe/mattergen_steering_2/checkpoints/my_train_mattergen_base
   finetune_cfg:

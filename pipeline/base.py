@@ -20,6 +20,12 @@ def get_device(device: str | None = None):
             device = 'mps'
         else:
             device = 'cpu'
+    elif device == 'cuda' and not torch.cuda.is_available():
+        logging.warning('Requested device=cuda but CUDA is unavailable; falling back to cpu.')
+        device = 'cpu'
+    elif device == 'mps' and not torch.backends.mps.is_available():
+        logging.warning('Requested device=mps but MPS is unavailable; falling back to cpu.')
+        device = 'cpu'
     return torch.device(device)
 
 
